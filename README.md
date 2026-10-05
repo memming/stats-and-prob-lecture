@@ -54,6 +54,9 @@ the course widgets.
 
 ## Hands-on exercises
 ### Is the dealer trying to cheat with a loaded coin?
+[Worksheet (PDF)](https://github.com/memming/stats-and-prob-lecture/releases/download/day2-worksheet-2026/coin_test.pdf):
+paper and pencil, about 25 minutes.
+Source and instructor key: [worksheets/](worksheets/) (`make student`, `make key`).
 
 ## Colab notebooks
 Students open the notebooks in Google Colab, signed in with a Google account,
