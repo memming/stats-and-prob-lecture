@@ -352,10 +352,11 @@ plt.show()
 #
 # Empirically, the probability of an outcome is the proportion its bar settles to
 # as the number of draws grows.
-# With independent draws from the same die, or the same tube,
-# the histogram converges to the probabilities:
+# With independent draws from a fixed probability distribution,
+# the histogram converges to its probabilities:
 # $1/6$ for each face of a fair die,
-# and 0.589, 0.345, 0.056, 0.010 for the four cell types.
+# and, in our simplified flow-cytometry model, 0.589, 0.345, 0.056, 0.010
+# for the four cell types.
 # Why it converges, and how fast, is the subject of the next notebook.
 
 # %% [markdown]
