@@ -148,8 +148,11 @@ plt.show()
 #
 # A fair die rolled 60 times should show each face about 10 times.
 # The cell after next rolls 60 times and shades the range from 8 to 12 rolls.
-# Call a run **balanced** if all six bars end inside the shaded range,
+# This is an arbitrary but useful teaching band: plus or minus two rolls,
+# or 20%, around the expected count of 10 for each face.
+# Call a run **balanced** if all six bars end inside this chosen band,
 # that is, if every face came up between 8 and 12 times.
+# A run outside the band can still come from a fair die; this is not a test of fairness.
 #
 # **Predict first:** if you do this 60-roll experiment 10 times,
 # how many of the 10 runs will be balanced?
@@ -178,8 +181,9 @@ plt.show()
 # <details>
 # <summary>Answer</summary>
 #
-# Only about 8% of 60-roll runs are balanced,
+# Only about 8% of 60-roll runs land inside our chosen 8-to-12 band for every face,
 # so in 10 runs you will most likely see one balanced run or none.
+# Falling outside that arbitrary band does not make the die suspicious.
 # The most and least common faces typically differ by about 8 rolls.
 #
 # Small samples are far more ragged than intuition expects.
@@ -282,12 +286,15 @@ plt.show()
 # ## A flow cytometry tube is a loaded die
 #
 # A gate on CD3+ T cells sorts each event into one of four categories.
-# Across 61 healthy donors, the average proportions were
-# (Roszczyk et al. 2024, Central European Journal of Immunology, Table 2):
+# Roszczyk et al. (2024, Table 2) report group mean frequencies for 61 healthy adults.
+# We divide its mean frequencies for CD4+, CD8+, DN, and DP cells by its mean CD3+
+# frequency to make this simplified distribution conditional on an event being CD3+:
 #
 # | CD4+ | CD8+ | double negative (DN) | double positive (DP) |
 # |---|---|---|---|
 # | 0.589 | 0.345 | 0.056 | 0.010 |
+#
+# These are derived from group means, not donor-level average proportions.
 #
 # Each event is one roll of a loaded four-sided die.
 # **For teaching purposes, we give the simulation the true proportions,
