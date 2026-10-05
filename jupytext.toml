@@ -1,0 +1,2 @@
+# drop the version stamp so paired files stop churning
+notebook_metadata_filter = "-jupytext.text_representation.jupytext_version"
