@@ -94,7 +94,8 @@ a student alone in a browser has nobody else to check against.
   no control panel at the top, and at most one new knob per step,
   placed beside the output it changes.
   Each step owns its controls;
-  a control read by two steps changes both at once, one of them off screen.
+  a control read by two steps couples them,
+  and the step that was not rerun keeps showing the old value.
 - **Prose asks; it does not pre-explain.**
   "Run this again. Same answer?" comes before any paragraph about variability.
   Many short markdown cells are good;
@@ -106,8 +107,8 @@ a student alone in a browser has nobody else to check against.
   The formula arrives with the name, beside the line that already computes it.
 - **Edit a literal before reaching for a widget.**
   Changing `N = 10` to `N = 100` shows exactly what changed.
-  A widget earns its place when the lesson needs many repetitions or a sweep -
-  dragging N from 10 to 10000 while a histogram narrows -
+  A widget (in Colab, a form field) earns its place
+  when the lesson needs many repetitions or a sweep
   that rerunning by hand would bury.
   Reading a widget's value is itself a construct; count it in step 6.
 - **"Run it again" needs fresh randomness.**

@@ -1,2 +1,7 @@
 CLAUDE.md
 __pycache__/
+.playwright-mcp/
+.ipynb_checkpoints/
+.DS_Store
+# last year's course material (books, tests); never publish
+old_ref/

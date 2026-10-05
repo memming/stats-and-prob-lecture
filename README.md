@@ -34,15 +34,17 @@ Prerequisite: Computational Thinking and basic Python coding
 ## Hands-on exercises
 ### Is the dealer trying to cheat with a loaded coin?
 
-## Marimo widgets
-We will use editable marimo notebooks running in the browser through WebAssembly.
+## Colab notebooks
+Students open the notebooks in Google Colab, signed in with a Google account,
+and save their own copy to Drive.
 Each exercise teaches a statistical idea and gives students a small amount
 of meaningful Python to write and debug.
-Widgets support repeated experiments after students have worked with the code.
 See [demo-design.md](demo-design.md) for the teaching sequence
-and [marimo.md](marimo.md) for authoring and classroom deployment.
+and [colab.md](colab.md) for authoring and classroom deployment.
 
 ### Random sampling and histogram plotting
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/01_random_sampling.ipynb)
+
 We would like to learn the python library for random sampling.
 Let's toss some coins and dice. Fun visualization.
 

@@ -16,36 +16,49 @@ so the words (mean, histogram, p-value, t-test) are familiar
 but often not tied to any phenomenon they have watched happen;
 a notebook earns its place by making that connection.
 Their programming comes from the Computational Thinking course:
-in late September 2026 they implemented a cellular automaton,
-so loops, conditionals, and a grid of cells are known ground.
+in late September 2026 they implemented a cellular automaton in Google Colab,
+so loops, conditionals, a grid of cells, and Colab itself are known ground.
 The course description and learning objectives are in `README.md`;
 every notebook should serve one of those objectives.
 Biological examples come from those two fields:
 experiments the students run or will read about, not generic biology.
 
-The current deliverable is a set of teaching widgets:
-marimo notebooks exported to WebAssembly,
-which students open in a browser and modify with nothing installed.
+The current deliverable is a set of Jupyter notebooks
+that students open in Google Colab, edit, and save to their own Drive.
 Topics: random sampling, the law of large numbers, histograms,
 sampling distributions, and shuffling (permutation) to generate null distributions.
+Until 2026-10-05 they were marimo WebAssembly notebooks;
+`design/01-random-sampling.md` records why the course moved.
 
-As of 2026-10-05 the repo has planning documents but no notebook,
-`pyproject.toml`, or build script yet;
-update this file when the layout lands.
+Layout: each notebook is `notebooks/NN_name.py` (jupytext `py:percent`, the source)
+paired with `notebooks/NN_name.ipynb` (what Colab opens),
+with one design note per notebook in `design/` under the same number.
+The repo is public at https://github.com/memming/stats-and-prob-lecture,
+and students open notebooks from its `main` branch in Colab (`colab.md`, "Delivery").
+There is no `pyproject.toml` or build script.
 
 ## Notebook guides
 
 Read `demo-design.md` for the teaching sequence and exercise budget.
-Read `marimo.md` for marimo authoring, commands, and WebAssembly checks.
+Read `colab.md` for pairing, Colab mechanics, delivery, and checks.
 
 ## Starting a new notebook: prior art first
 
 Do not design from scratch, and do not inherit a weak design either.
-Before drafting the step ladder, search the web for how others teach the same concept,
+Start with `old_ref/`, local and git-ignored:
+last year's five-day version of this course (October 2025),
+with its Colab activity notebooks, readings, and books.
+Never commit or publish anything from it; the books are copyrighted.
+Of the books, Julian Simon's *Resampling: The New Statistics*
+(`old_ref/books/02_resampling_book/`) fits this course best;
+its open Python edition, Simon and Brett's *Resampling with*
+(https://github.com/resampling-stats/resampling-with), is the one to cite and link.
+
+Then search the web for how others teach the same concept,
 and open each resource rather than judging it from a search snippet.
 Search five places:
 established interactive tools,
-Python and marimo notebooks (including the links listed under the notebook in `README.md`),
+Python notebooks (including the links listed under the notebook in `README.md`),
 university courses that post their labs and lecture code,
 GitHub, for code that real courses use,
 and the education research on the misconceptions the concept runs into.
@@ -66,5 +79,5 @@ Present that note for approval before writing any cell.
 ## Authoring rules
 
 Before designing, writing, or reviewing a notebook, read both guides.
-`demo-design.md` replaces the global `teaching-materials.md`
+Together, `demo-design.md` and `colab.md` replace the global `teaching-materials.md`
 and `notebook-craft.md` for this repo.
