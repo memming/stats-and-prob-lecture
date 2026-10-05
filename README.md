@@ -24,12 +24,33 @@ Prerequisite: Computational Thinking and basic Python coding
  * Day 3: Experimental design
 
 ## Resources
- * Wasserman, L. (2010). All of Statistics: A Concise Course in Statistical Inference (Springer Texts in Statistics). Springer. https://www.stat.cmu.edu/~larry/all-of-statistics/
  * Simon, J. L. (1997). Resampling: The new statistics. Resampling Stats. https://resample.com/intro-text-online/
+ * Wasserman, L. (2010). All of Statistics: A Concise Course in Statistical Inference (Springer Texts in Statistics). Springer. https://www.stat.cmu.edu/~larry/all-of-statistics/
  * Andrew Gelman, Jennifer Hill, Aki Vehtari (2024): Regression and Other Stories https://avehtari.github.io/ROS-Examples/
  * Ryan Tibshirani's course: https://www.stat.cmu.edu/~ryantibs/datamining/
  * Statistical Rethinking (Bayesian) course materials (including videos) https://github.com/rmcelreath/stat_rethinking_2024
  * The BMJ Statistics at Square One: https://thebmj-frontend.bmj.com/about-bmj/resources-readers/publications/statistics-square-one https://indp-stat-2025.streamlit.app (https://github.com/hyungju-jeon/indp-stat)
+
+### Resampling reading guide
+
+The widgets use Julian L. Simon's *Resampling: The New Statistics* as a
+companion for the simulation-first view of probability and inference.
+The locally stored copy is reference material and is not distributed with this
+repository. The chapter numbers below are a quick way to find the relevant
+discussion in a legitimate copy of the book.
+
+| Course topic | Read first | Useful follow-up |
+| --- | --- | --- |
+| Random sampling and histograms | Chapter 4, "The Monte Carlo Simulation Method (Resampling)" | Chapter 9, "Sampling Variability and Small Samples"; Chapter 10, "A Definition and General Procedure for Monte Carlo Simulation" |
+| Conditional probability and independence | Chapter 4, "Conditional and Unconditional Probabilities" | Chapter 5, "The Special Case of Independence"; Chapter 6, "The Concepts of Replacement and Non-Replacement" |
+| Law of large numbers and sampling distributions | Chapter 9, "On Variability in Sampling" | Chapter 20, "Estimating the Accuracy of a Sample Mean"; Chapter 21, "The Distance Between Sample and Population Mean" |
+| Shuffling and permutation null distributions | Chapter 15, "Should a Single Sample of Counted Data be Considered Different From a Benchmark Universe?" | Chapter 17, hypothesis testing with paired comparisons; Chapter 19, "Skeleton Procedure for Testing Hypotheses" and "Choice of the Benchmark Universe" |
+| Hypothesis tests, p-values, and power | Chapter 16, "The Logic of Hypothesis Tests" and "The Concept of Statistical Significance" | Chapter 18, hypothesis testing with measured data; Chapter 24, "How Large a Sample?" |
+
+For every chapter, start with the physical or biological process being modeled,
+then identify what is repeatedly sampled or shuffled, and only then interpret
+the resulting distribution. That is the common thread between the reading and
+the course widgets.
 
 ## Hands-on exercises
 ### Is the dealer trying to cheat with a loaded coin?
