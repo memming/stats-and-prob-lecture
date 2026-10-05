@@ -9,6 +9,7 @@ Prerequisite: Computational Thinking and basic Python coding
  * Apply the law of large numbers to averages;
  * Use sampling distributions to describe p-value and statistical power;
  * Use pseudo-random numbers to simulate probabilistic outcomes;
+ * Write and debug short Python programs that generate and inspect samples;
  * Use shuffling to generate sampling distributions under independence;
  * Develop, formulate, execute, and interpret statistical tests of biological hypotheses using quantitative data;
  * Determine when to use null hypothesis tests and how to report effect sizes;
@@ -22,11 +23,24 @@ Prerequisite: Computational Thinking and basic Python coding
  * Day 2: Hypothesis testing
  * Day 3: Experimental design
 
+## Resources
+ * Wasserman, L. (2010). All of Statistics: A Concise Course in Statistical Inference (Springer Texts in Statistics). Springer. https://www.stat.cmu.edu/~larry/all-of-statistics/
+ * Simon, J. L. (1997). Resampling: The new statistics. Resampling Stats. https://resample.com/intro-text-online/
+ * Andrew Gelman, Jennifer Hill, Aki Vehtari (2024): Regression and Other Stories https://avehtari.github.io/ROS-Examples/
+ * Ryan Tibshirani's course: https://www.stat.cmu.edu/~ryantibs/datamining/
+ * Statistical Rethinking (Bayesian) course materials (including videos) https://github.com/rmcelreath/stat_rethinking_2024
+ * The BMJ Statistics at Square One: https://thebmj-frontend.bmj.com/about-bmj/resources-readers/publications/statistics-square-one https://indp-stat-2025.streamlit.app (https://github.com/hyungju-jeon/indp-stat)
+
 ## Hands-on exercises
 ### Is the dealer trying to cheat with a loaded coin?
 
 ## Marimo widgets
-We will use WASM Marimo notebooks so that the students can see the python code and use awesome visualizations.
+We will use editable marimo notebooks running in the browser through WebAssembly.
+Each exercise teaches a statistical idea and gives students a small amount
+of meaningful Python to write and debug.
+Widgets support repeated experiments after students have worked with the code.
+See [demo-design.md](demo-design.md) for the teaching sequence
+and [marimo.md](marimo.md) for authoring and classroom deployment.
 
 ### Random sampling and histogram plotting
 We would like to learn the python library for random sampling.
@@ -50,3 +64,5 @@ This exercise is after the hands-on exercise.
 ### Type-I, Type-II errors and staistical power
 
 ### Paired vs Unpaird t-test
+
+### Invent your own procedure for multiple testing

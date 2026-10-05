@@ -2,8 +2,9 @@
 
 How to plan and review one notebook in this repo:
 a computational experiment of about 15 minutes (10-20)
-from which a programming novice leaves understanding one concept clearly.
-Programming is the instrument, never a second subject.
+from which a programming novice leaves understanding one statistical concept
+and having practiced one useful Python move.
+Coding takes some effort, but should not consume the statistical lesson.
 
 ## Ground rules
 
@@ -29,6 +30,9 @@ Exercises take three shapes:
 and **fill one line**, where the single blank line is the concept itself
 and the cell runs once it is filled.
 Actually blank that line; a solution with the prompt trailing as a comment is a read-along.
+Give students enough working code around the blank to diagnose a mistake.
+Let them try before revealing the answer, but do not let a syntax error
+block the rest of the statistical exercise.
 Harder exercises are labeled `**Stretch (optional):**`,
 and the core path alone covers every concept.
 Each exercise and each prediction has a collapsed answer directly below it,
@@ -59,8 +63,9 @@ a student alone in a browser has nobody else to check against.
    Two to four places where the student changes one value and reruns,
    most of them preceded by a one-line prediction.
    Exactly one thing changes per moment.
-6. **Audit the Python.**
-   For each construct the student must read, ask whether the concept needs it.
+6. **Choose the Python practice.**
+   Name the one library call or language move students will write or debug.
+   For each other construct the student must read, ask whether the concept needs it.
    Functions, classes, comprehensions, fancy indexing, callbacks,
    and plotting infrastructure usually do not.
    An unavoidable new construct gets its own step,
@@ -72,12 +77,24 @@ a student alone in a browser has nobody else to check against.
 8. **Close in this order:**
    the student explains what they saw to an imagined classmate,
    then the conventional name, then the formula if there is one,
-   then "you can now..." with a transfer to a biological measurement.
+   then "you can now..." with a transfer to a measurement
+   from cancer immunology or neuroscience.
 
 ## Rules
 
 - **At most one new thing per step** among a concept, a Python construct,
   a kind of plot, and an interaction mechanism.
+- **Show a function's raw output before composing it.**
+  Any call students may not know is first run alone, with its output shown:
+  `rolls == 3` before `(rolls == 3).sum()`, `np.arange(0.5, 7)` before it becomes bin edges.
+  This is not the lesson; it removes friction
+  and models the habit of looking at what a call returns.
+- **Knobs arrive one at a time, where they are used.**
+  The notebook unfolds as a sequence, never as a dashboard:
+  no control panel at the top, and at most one new knob per step,
+  placed beside the output it changes.
+  Each step owns its controls;
+  a control read by two steps changes both at once, one of them off screen.
 - **Prose asks; it does not pre-explain.**
   "Run this again. Same answer?" comes before any paragraph about variability.
   Many short markdown cells are good;
