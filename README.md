@@ -76,6 +76,7 @@ see also:
  * https://risk-engineering.org/notebook/coins-dice.html
 
 ### Central limit theorem and Law of large numbers
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/02_averages.ipynb)
 
 ### Sampling distribution of the mean
 
@@ -83,6 +84,8 @@ see also:
 
 ### Implement your own hypothesis test
 This exercise is after the hands-on exercise.
+
+Day 2 afternoon:
 
 ### Type-I, Type-II errors and staistical power
 
