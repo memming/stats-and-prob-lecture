@@ -35,63 +35,37 @@ Prerequisite: Computational Thinking and basic Python coding
 
 The widgets use Julian L. Simon's *Resampling: The New Statistics* as a
 companion for the simulation-first view of probability and inference.
-The locally stored copy is reference material and is not distributed with this
-repository. The chapter numbers below are a quick way to find the relevant
-discussion in a legitimate copy of the book.
 
-| Course topic | Read first | Useful follow-up |
-| --- | --- | --- |
-| Random sampling and histograms | Chapter 4, "The Monte Carlo Simulation Method (Resampling)" | Chapter 9, "Sampling Variability and Small Samples"; Chapter 10, "A Definition and General Procedure for Monte Carlo Simulation" |
-| Conditional probability and independence | Chapter 4, "Conditional and Unconditional Probabilities" | Chapter 5, "The Special Case of Independence"; Chapter 6, "The Concepts of Replacement and Non-Replacement" |
-| Law of large numbers and sampling distributions | Chapter 9, "On Variability in Sampling" | Chapter 20, "Estimating the Accuracy of a Sample Mean"; Chapter 21, "The Distance Between Sample and Population Mean" |
-| Shuffling and permutation null distributions | Chapter 15, "Should a Single Sample of Counted Data be Considered Different From a Benchmark Universe?" | Chapter 17, hypothesis testing with paired comparisons; Chapter 19, "Skeleton Procedure for Testing Hypotheses" and "Choice of the Benchmark Universe" |
-| Hypothesis tests, p-values, and power | Chapter 16, "The Logic of Hypothesis Tests" and "The Concept of Statistical Significance" | Chapter 18, hypothesis testing with measured data; Chapter 24, "How Large a Sample?" |
+# Activities
 
-For every chapter, start with the physical or biological process being modeled,
-then identify what is repeatedly sampled or shuffled, and only then interpret
-the resulting distribution. That is the common thread between the reading and
-the course widgets.
-
-## Hands-on exercises
-### Is the dealer trying to cheat with a loaded coin?
-[Worksheet (PDF)](https://github.com/memming/stats-and-prob-lecture/releases/download/day2-worksheet-2026/coin_test.pdf):
-paper and pencil, about 25 minutes.
-Source and instructor key: [worksheets/](worksheets/) (`make student`, `make key`).
-
-## Colab notebooks
-Students open the notebooks in Google Colab, signed in with a Google account,
-and save their own copy to Drive.
-Each exercise teaches a statistical idea and gives students a small amount
-of meaningful Python to write and debug.
-See [demo-design.md](demo-design.md) for the teaching sequence
-and [colab.md](colab.md) for authoring and classroom deployment.
+## Day 1 morning
 
 ### Random sampling and histogram plotting
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/01_random_sampling.ipynb)
 
-We would like to learn the python library for random sampling.
-Let's toss some coins and dice. Fun visualization.
-
-see also:
- * https://ubcmath.github.io/python/probability/discrete.html
- * https://www.eg.bucknell.edu/~phys310/skills/data_analysis/coin_flip_CLT.html
- * https://github.com/buruzaemon/IntroductionToProbabilityPy
- * https://risk-engineering.org/notebook/coins-dice.html
-
 ### Central limit theorem and Law of large numbers
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/02_averages.ipynb)
 
-### Sampling distribution of the mean
+## Day 2 morning:
+
+### Hands-on exercises: Is the dealer trying to cheat with a loaded coin?
+[Worksheet (PDF)](https://github.com/memming/stats-and-prob-lecture/releases/download/day2-worksheet-2026/coin_test.pdf):
+paper and pencil, about 25 minutes.
+Source and instructor key: [worksheets/](worksheets/) (`make student`, `make key`).
 
 ### Shuffling and Permutation, how to break dependence
 
 ### Implement your own hypothesis test
 This exercise is after the hands-on exercise.
 
-Day 2 afternoon:
+## Day 2 afternoon:
 
 ### Type-I, Type-II errors and staistical power
 
+### Invent your own procedure for multiple testing
+
+## Day 3 morning:
+
 ### Paired vs Unpaird t-test
 
-### Invent your own procedure for multiple testing
+### Power analysis
