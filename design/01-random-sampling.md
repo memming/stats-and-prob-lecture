@@ -61,8 +61,9 @@ so rerunning a cell gives a new sample and a fresh run reproduces every figure.
    and that the order of the rolls is gone.
    New: a histogram with explicit bin edges.
 5. **Predict, then roll 60.**
+   A run is **balanced** if every face came up between 8 and 12 times.
    Prediction first, in a Colab form dropdown:
-   "If you ran it 10 times, in how many runs would every bar land between 8 and 12?"
+   "If you do this 60-roll experiment 10 times, how many of the 10 runs will be balanced?"
    The 60-roll cell opens with an `assert` that stops it until a prediction is chosen;
    then rerun it 10 times and tally.
    Answer: about 8% per run; the most and least common faces typically differ by 8 rolls.

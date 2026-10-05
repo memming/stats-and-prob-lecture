@@ -62,6 +62,13 @@ uvx jupytext --sync notebooks/NN_name.py                                      # 
   `prediction = "choose"  # @param ["choose", "0", "1", "2"]`.
   Choosing a value rewrites the line; the student then runs the cell.
   Outside Colab the comment is inert and the line is ordinary Python.
+- The menu appears on the right of the cell, while students read the code on the left.
+  Put a comment above the `# @param` line pointing to the menu on the right
+  and saying not to edit that line by hand,
+  and point to "the menu on the right" in the markdown and the gate message too.
+- Ask for a prediction about a named event, not a nested condition.
+  "How many of 10 runs will be balanced?", with *balanced* defined just above,
+  reads at once; "in how many runs would every bar end inside the band?" did not.
 - To hold a result back until the prediction is made,
   start the result cell with
   `assert prediction != "choose", "Choose your prediction in the menu above and run that cell first."`.

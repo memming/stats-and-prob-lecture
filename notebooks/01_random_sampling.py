@@ -146,22 +146,26 @@ plt.show()
 # %% [markdown]
 # ## Sixty rolls: predict before you look
 #
-# With 60 rolls of a fair die, each face is expected about 10 times.
-# The cell after next rolls 60 times and shades the band from 8 to 12 rolls.
+# A fair die rolled 60 times should show each face about 10 times.
+# The cell after next rolls 60 times and shades the range from 8 to 12 rolls.
+# Call a run **balanced** if all six bars end inside the shaded range,
+# that is, if every face came up between 8 and 12 times.
 #
-# **Predict first:** if you ran it 10 times,
-# in how many runs would *every* bar end inside the band?
-# Choose your answer in the menu below, then run that cell.
+# **Predict first:** if you do this 60-roll experiment 10 times,
+# how many of the 10 runs will be balanced?
+# Choose your answer in the menu on the right side of the next cell, then run that cell.
 
 # %%
+# Choose your prediction in the menu on the right of this cell, then run the cell.
+# The menu rewrites the line below; do not edit it by hand.
 prediction = "choose"  # @param ["choose", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
 # %%
-assert prediction != "choose", "Choose your prediction in the menu above and run that cell first."
+assert prediction != "choose", "Choose your prediction in the menu on the right of the cell above, then run that cell."
 
 rolls_60 = rng.integers(1, 7, size=60)
 plt.figure(figsize=(5, 3))
-plt.axhspan(8, 12, color="0.9")  # the band from 8 to 12 rolls
+plt.axhspan(8, 12, color="0.9")  # shaded range: 8 to 12 rolls
 plt.hist(rolls_60, bins=edges, edgecolor="white")
 plt.locator_params(axis="y", integer=True)  # counts are whole numbers
 plt.xlabel("face")
@@ -169,14 +173,13 @@ plt.ylabel("number of rolls")
 plt.show()
 
 # %% [markdown]
-# Now run that cell 10 times with Ctrl+Enter,
-# keeping a tally of the runs in which every bar is inside the band.
+# Now run that cell 10 times with Ctrl+Enter, keeping a tally of the balanced runs.
 #
 # <details>
 # <summary>Answer</summary>
 #
-# In a single run of 60 rolls, all six faces land between 8 and 12 only about 8% of the time,
-# so in 10 runs you will most likely see it once or not at all.
+# Only about 8% of 60-roll runs are balanced,
+# so in 10 runs you will most likely see one balanced run or none.
 # The most and least common faces typically differ by about 8 rolls.
 #
 # Small samples are far more ragged than intuition expects.
