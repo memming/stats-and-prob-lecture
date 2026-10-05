@@ -220,10 +220,13 @@ plt.title(f"first {N} rolls")
 plt.show()
 
 # %% [markdown]
-# The height of the first bar, computed by hand (rerun this cell after changing `N`):
+# The height of the first bar, computed directly from the rolls,
+# and one sixth as a decimal for comparison
+# (rerun this cell after changing `N`):
 
 # %%
-print((sample == 1).sum() / N)
+print((sample == 1).sum() / N)  # proportion of ones among the first N rolls
+print(1 / 6)
 
 # %% [markdown]
 # <details>
@@ -260,7 +263,7 @@ print((sample == 1).sum() / N)
 # where $n_k$ is the number of rolls showing $k$.
 # The cell `(sample == 1).sum() / N` above computes it for $k = 1$.
 #
-# The level the bars settle toward, $1/6$ for every face of a fair die,
+# The level the bars settle toward, $1/6$ (about 0.167) for every face of a fair die,
 # is the **probability** of each face.
 # With many rolls the empirical distribution approaches the probabilities;
 # with few, it can be far from them.
@@ -287,7 +290,8 @@ plt.show()
 # | 0.589 | 0.345 | 0.056 | 0.010 |
 #
 # Each event is one roll of a loaded four-sided die.
-# **We hand the simulation the true proportions here.
+# **For teaching purposes, we give the simulation the true proportions,
+# so that any raggedness you see comes from sampling alone.
 # A real tube never tells you them, and they differ from donor to donor.**
 #
 # `rng.choice` rolls such a die:
@@ -337,10 +341,15 @@ plt.show()
 # and, for any measurement that sorts things into categories,
 # see how many observations its histogram needs before it resembles the truth.
 #
-# **Transfer:** pick a measurement from your own work that sorts things into categories:
-# cell types, trial outcomes, an animal's choices.
-# Roughly what proportions would you expect,
-# and how many observations would you need before the rarest category shows up reliably?
+# ## What is probability?
+#
+# Empirically, the probability of an outcome is the proportion its bar settles to
+# as the number of draws grows.
+# With independent draws from the same die, or the same tube,
+# the histogram converges to the probabilities:
+# $1/6$ for each face of a fair die,
+# and 0.589, 0.345, 0.056, 0.010 for the four cell types.
+# Why it converges, and how fast, is the subject of the next notebook.
 
 # %% [markdown]
 # ## Stretch (optional)

@@ -77,8 +77,11 @@ a student alone in a browser has nobody else to check against.
 8. **Close in this order:**
    the student explains what they saw to an imagined classmate,
    then the conventional name, then the formula if there is one,
-   then "you can now..." with a transfer to a measurement
-   from cancer immunology or neuroscience.
+   then a transfer to a measurement from cancer immunology or neuroscience,
+   then "you can now...",
+   and last the concept itself in one plain sentence.
+   The transfer is a worked example the student runs,
+   not an open-ended "think of your own data" prompt.
 
 ## Rules
 

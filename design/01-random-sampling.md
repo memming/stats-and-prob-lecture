@@ -83,14 +83,20 @@ so rerunning a cell gives a new sample and a fresh run reproduces every figure.
    The formula, proportion of face k = (rolls showing k) / N,
    appears beside the line that already computes it.
 8. **Transfer: a flow tube is a loaded four-sided die.**
-   `rng.choice(["CD4+", "CD8+", "DN", "DP"], size=n_events, p=[0.59, 0.35, 0.06, 0.01])`,
+   `rng.choice(["CD4+", "CD8+", "DN", "DP"], size=n_events, p=[0.589, 0.345, 0.056, 0.010])`,
    the mean of 61 healthy donors (Roszczyk 2024).
-   **We hand the simulation the true proportions; a real tube never tells you them.**
+   **For teaching purposes we give the simulation the true proportions,
+   so any raggedness comes from sampling alone; a real tube never tells you them.**
    With 100 events the double-positive bar is empty 37% of the time, with 200 still 13%.
    Say that this is a bar chart of categories, not a histogram of a number.
    "You can now simulate any categorical measurement
    and see how many observations its histogram needs before you trust it."
+   The notebook ends on "What is probability?":
+   with independent draws from the same die or tube,
+   the histogram converges to the probabilities.
    New: `rng.choice` with `p=`. Active: transfer.
+   (An open-ended "pick a measurement from your own work" prompt was dropped
+   on Memming's review, 2026-10-05: clunky, and it added nothing.)
 
 **Stretch (optional):**
 - What does `plt.hist(rolls)` draw with its default bins, and why are there gaps?
