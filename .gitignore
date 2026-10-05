@@ -12,3 +12,4 @@ worksheets/*.log
 worksheets/*.fls
 worksheets/*.fdb_latexmk
 worksheets/*.out
+worksheets/*.synctex.gz
