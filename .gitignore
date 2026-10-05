@@ -5,3 +5,10 @@ __pycache__/
 .DS_Store
 # last year's course material (books, tests); never publish
 old_ref/
+# worksheet build products; rebuild with make in worksheets/
+worksheets/*.pdf
+worksheets/*.aux
+worksheets/*.log
+worksheets/*.fls
+worksheets/*.fdb_latexmk
+worksheets/*.out

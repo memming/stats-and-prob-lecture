@@ -1,0 +1,256 @@
+% Day 2 paper-and-pencil worksheet: discover the algorithm of a hypothesis test.
+% Students are told what the binomial distribution is, and nothing about hypothesis testing:
+% no "null hypothesis", "test statistic", "significance", or "p-value" on the student pages.
+% Order: they invent a decision rule in the dealer's plain language, write it down as
+% instructions (Q6), apply it to data, decide for themselves which outcomes count as
+% "at least as surprising" (Q8), and only then interpret their number (Q9).
+% The instructor key maps each question to its standard name for the lecture that follows.
+%
+% One source, two builds (see Makefile):
+%   make student -> coin_test.pdf      (blank answer boxes)
+%   make key     -> coin_test_key.pdf  (answers in the same boxes, plus an instructor-notes page)
+% The key is switched on only by the build (\showsolutions); never edit the switch by hand.
+% Modernized from old_ref/worksheet_NHT_discovery_v2.pdf (2025 course),
+% with two rounds of pedagogical review from Codex (2026-10-05).
+
+\documentclass[11pt]{article}
+\usepackage[lecture,noheaders,nobib]{catniplab}
+\usepackage{amsmath}
+\input{math_preamble}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\newif\ifsolutions
+\ifdefined\showsolutions \solutionstrue \fi
+
+% Answer box: same height in both builds, so the key lines up page for page.
+% #1 = box height, #2 = the answer, shown only in the key.
+\newcommand{\answerbox}[2][2.2cm]{%
+  \par\smallskip\noindent
+  \begin{tcolorbox}[colback=white, colframe=gray!55, boxrule=0.4pt, sharp corners,
+      height=#1, valign=top, left=5pt, right=5pt, top=3pt, bottom=3pt]
+    \ifsolutions{\small\color{darkblue}#2}\fi
+  \end{tcolorbox}\par}
+
+\newcommand{\question}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\pagestyle{plain}
+
+\begin{document}
+
+% ------------------------------------------------------------------ page 1
+{\small INDP/ICDP Data Analysis, Statistics, and Experimental Design \hfill Day 2}
+
+\medskip
+{\LARGE\bfseries Is the dealer's coin fair?}\par
+\smallskip
+{\large Invent a way to decide}
+\ifsolutions\hfill{\large\bfseries\color{c:time}Instructor key}\fi
+
+\medskip
+Names: \rule{0.38\textwidth}{0.4pt} \hfill \rule{0.38\textwidth}{0.4pt}
+
+\medskip
+Work in pairs, with a pencil; about 30 minutes. No calculator needed.
+
+\begin{highlightbox}
+\textbf{The binomial distribution.}
+Flip a coin $n$ times, independently, with probability $p$ of heads on every flip,
+and count the heads, $X$.
+Then $X$ has the \emph{binomial distribution}:
+\[
+  P(X = k) = \binom{n}{k}\, p^k (1-p)^{n-k}, \qquad k = 0, 1, \dots, n,
+\]
+where $\binom{n}{k}$ counts the sequences of $n$ flips that contain exactly $k$ heads.
+For a fair coin ($p = 1/2$) and $n = 10$, all $2^{10} = 1024$ sequences are equally likely,
+so $P(X = k) = \binom{10}{k} / 1024$:
+the number of sequences with $k$ heads, out of 1024 (chart and table below).
+\end{highlightbox}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.55\textwidth}
+\begin{tikzpicture}
+  \begin{axis}[
+      ybar, bar width=9pt,
+      width=0.93\linewidth, height=5.2cm,
+      ymin=0, ymax=300, ytick={0,100,200,300},
+      xmin=-0.7, xmax=10.7, xtick={0,...,10},
+      axis lines*=left,
+      xlabel={number of heads $k$ in 10 flips of a fair coin},
+      ylabel={sequences (out of 1024)},
+      % numbers in the text font (Lato), not the math font
+      xticklabel={\pgfmathprintnumber[assume math mode=true]{\tick}},
+      yticklabel={\pgfmathprintnumber[assume math mode=true]{\tick}},
+      nodes near coords={\pgfmathprintnumber[assume math mode=true]{\pgfplotspointmeta}},
+      nodes near coords style={font=\scriptsize},
+      tick label style={font=\small}, label style={font=\small},
+    ]
+    \addplot[fill=darkblue!65, draw=none] coordinates
+      {(0,1) (1,10) (2,45) (3,120) (4,210) (5,252) (6,210) (7,120) (8,45) (9,10) (10,1)};
+  \end{axis}
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.41\textwidth}
+\centering\small\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{c|ccc}
+  \toprule
+  heads & \multicolumn{3}{c}{sequences with} \\
+  $k$ & exactly $k$ & at most $k$ & at least $k$ \\
+  \midrule
+  0  & 1   & 1    & 1024 \\
+  1  & 10  & 11   & 1023 \\
+  2  & 45  & 56   & 1013 \\
+  3  & 120 & 176  & 968  \\
+  4  & 210 & 386  & 848  \\
+  5  & 252 & 638  & 638  \\
+  6  & 210 & 848  & 386  \\
+  7  & 120 & 968  & 176  \\
+  8  & 45  & 1013 & 56   \\
+  9  & 10  & 1023 & 11   \\
+  10 & 1   & 1024 & 1    \\
+  \bottomrule
+\end{tabular}
+\end{minipage}
+
+\medskip
+\begin{highlightbox}
+A dealer invites you to bet on a coin and claims it is fair.
+You may watch 10 flips; then you must decide whether to accuse the dealer of using an unfair coin.
+\textbf{Before any coin is flipped, plan how you will decide.}
+\end{highlightbox}
+
+\question{Q1.}
+If the dealer is honest, which numbers of heads would you expect in 10 flips?
+Which numbers would make you suspect the dealer? Justify your choice.
+\answerbox[1.7cm]{Expect about 5; 4 to 6 heads cover 672 of 1024 sequences, about two thirds.
+Suspicious: results that are rare for a fair coin, such as 0, 1, 9, or 10 heads (22 of 1024, about 2\%).}
+
+\question{Q2.}
+Write your plan: which numbers of heads will lead you to accuse the dealer?
+\answerbox[1.0cm]{For example: accuse if there are 0, 1, 9, or 10 heads.}
+
+\question{Q3.}
+If the dealer is honest, how often would your plan wrongly accuse them? Count sequences in the table.
+\answerbox[1.2cm]{For $\{0, 1, 9, 10\}$: $1 + 10 + 10 + 1 = 22$ of 1024, about 2\%.
+For $\{0, 1, 2, 8, 9, 10\}$: 112 of 1024, about 11\%.}
+
+\question{Q4.}
+Here is a limit we give you: wrongly accuse an honest dealer at most 1 time in 20
+(5\%, about 51 of the 1024 sequences).
+Adjust your plan to accuse on as many numbers of heads as that limit allows.
+\answerbox[1.3cm]{Accuse on 0, 1, 9, or 10 heads: 22 sequences, 2.1\%.
+Adding 2 and 8 makes 112 sequences, 10.9\%, over the limit.
+A plan that accuses on a fixed list of head counts cannot hit 5\% exactly.}
+
+\question{Q5.}
+Why make the plan before seeing any flips?
+\answerbox[1.2cm]{Otherwise we could always pick a list that contains what we saw,
+and the 1-in-20 promise, which is about the plan, would mean nothing.}
+
+\question{Q6.}
+Write instructions that another pair could follow to decide about a claim using data.
+For a different claim, which of your steps would they have to work out anew?
+\answerbox[3.6cm]{(1) State the claim (the coin is fair).
+(2) Choose what to compute from the data (the number of heads).
+(3) Work out how often each value occurs if the claim is true (the binomial table).
+(4) Before seeing the data, list the values that lead to rejecting the claim,
+so that a true claim is rejected at most a chosen fraction of the time (1 in 20).
+(5) Collect the data, compute the number, and reject the claim if it is on the list.
+For a new claim, steps 2--4 must be redone: what to compute, how it behaves if the claim is true, and the list.}
+
+\medskip
+The dealer flips: \quad \texttt{H H H T H H H H H H} \quad (9 heads, 1 tail).
+
+\question{Q7.}
+Follow your instructions. Do you accuse?
+\answerbox[0.9cm]{Yes: 9 heads is on the list $\{0, 1, 9, 10\}$.}
+
+\question{Q8.}
+The dealer protests: ``A fair coin can give nine heads!''
+Decide which results would be \emph{at least as surprising} as nine heads if the dealer is honest,
+and compute how often an honest coin gives one of them.
+\answerbox[1.6cm]{Counting both directions (as far from 5 as 9 heads is): 0, 1, 9, or 10 heads,
+22 of 1024, about 0.021.
+Pairs who count only 9 or 10 heads get 11 of 1024, about 0.011; that matches a suspicion of a coin loaded toward heads.
+Either is defensible if chosen before seeing the flips.}
+
+\question{Q9.}
+Across many repetitions, what fraction does your number from Q8 describe?
+What must be true for that interpretation to hold?
+Can it tell us how often dealers who produce this result are honest? Explain.
+\answerbox[2.4cm]{The fraction of many 10-flip runs with an honest coin that are at least as surprising as ours.
+It needs independent flips with probability 1/2, and ``surprising'' defined without peeking at the data.
+It cannot say how often such dealers are honest:
+that depends on how many dealers cheat, and by how much, which the calculation never uses.}
+
+\question{Q10.}
+Suppose the dealer had flipped 8 heads instead. Following your plan, do you accuse?
+Would not accusing prove that the dealer is honest?
+\answerbox[1.4cm]{No accusation: 8 is not on the list. That does not prove the coin is fair:
+an unfair coin can easily give 8 heads; a coin with heads probability 0.7 is caught only about 15\% of the time.}
+
+% ------------------------------------------------------------------ key only
+% Kept off the worksheet pages so that the key's first pages line up with the student copy.
+\ifsolutions
+\newpage
+\section*{Instructor notes}
+
+The student pages deliberately use no hypothesis-testing vocabulary.
+In the debrief, name what the students built:
+
+\smallskip
+\begin{center}\small
+\begin{tabular}{p{0.5\textwidth}p{0.4\textwidth}}
+  \toprule
+  In the worksheet & Standard name \\
+  \midrule
+  the dealer's claim, ``the coin is fair'' & null hypothesis $H_0$ \\
+  ``the coin is unfair'' & alternative $H_1$ (two-sided or one-sided, Q8) \\
+  the number of heads (Q2, Q6 step 2) & test statistic \\
+  how often each value occurs if the claim is true (Q6 step 3) & null distribution \\
+  wrongly accusing an honest dealer (Q3) & type I error, false positive \\
+  the limit of 1 time in 20 (Q4) & significance level $\alpha = 0.05$ \\
+  the list of results that lead to an accusation (Q4) & rejection region \\
+  how often an honest coin is at least as surprising (Q8) & p-value \\
+  the instructions (Q6) & the algorithm of a null hypothesis test \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=4pt]
+  \item \textbf{Timing.} About 30 minutes: Q1--Q5 12, Q6 8, Q7--Q10 10.
+    Protect the time for Q6, and have two pairs read their instructions aloud.
+  \item \textbf{Q1.} Pairs who list only many heads are picturing a coin loaded toward heads;
+    ask what a coin loaded toward tails would do. Do not settle it for them: Q8 returns to it.
+  \item \textbf{Q3 is a rescue prompt.} Let pairs propose a plan in Q2 before calibrating it.
+    The 1-in-20 limit in Q4 is supplied, not derived; say so.
+  \item \textbf{Q4--Q5.} The 1-in-20 is a property of the plan over many repeated experiments with a fair coin,
+    never the probability that a particular accusation is wrong.
+    Plans that accuse on a fixed list of head counts cannot hit 5\% exactly; this one runs at 2.1\%.
+  \item \textbf{Q8.} Compare the pairs' choices of ``at least as surprising'':
+    both directions gives 22/1024, heads only gives 11/1024.
+    This is where two-sided and one-sided tests come from, and why the direction must be chosen before the flips.
+  \item \textbf{Q9 and Q10} target the commonest misreadings of a p-value:
+    the probability that $H_0$ is true, and ``not rejected'' read as ``proven true''.
+    A third worth raising aloud: with a 5\% plan, the fraction of accusations that are wrong is \emph{not} 5\%;
+    it depends on how many dealers cheat.
+  \item \textbf{Power, at the board after Q10.} Ask students to predict first:
+    if the coin really lands heads with probability 0.7, how often does the plan accuse?
+    Almost always, about half the time, or rarely?
+    Rarely: $P(X = 9) \approx 0.121$, $P(X = 10) \approx 0.028$, $P(X \le 1) \approx 0.0001$, about 0.15 in total.
+    That is the \emph{power} of the test against $p = 0.7$; more flips would raise it,
+    which leads to sample-size planning on Day 3.
+  \item \textbf{Mouse, in the debrief.} A mouse turns left on 9 of 10 T-maze trials:
+    can the same table test ``no side preference''?
+    Only if the trials act like independent flips with the same probability;
+    mice learn, alternate, and perseverate, so step 3 of the instructions needs a different model.
+    The same caution applies to cells counted from one tube or one animal.
+  \item \textbf{Afternoon.} Students turn their Q6 instructions into Python.
+\end{itemize}
+\fi
+
+\end{document}
