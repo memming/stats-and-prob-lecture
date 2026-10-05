@@ -57,7 +57,7 @@ each four times the last.
    and `.mean(axis=1)` (one average per run), both printed raw.
    New: a 2-D `size` and `axis=1`.
 3. **Lopsided runs: predict, then count.**
-   Call a run **lopsided** if at least 3 in 4 of its tosses are heads.
+   Let's call a run **lopsided** if at least 3 in 4 of its tosses are heads.
    Form dropdown, with the `assert` gate from notebook 1:
    "Which is more likely to be lopsided: a run of 4 tosses or a run of 16?"
    (options: 4 tosses / 16 tosses / about the same).
@@ -78,6 +78,9 @@ each four times the last.
    Predict: "each time N is multiplied by 4, what happens to the width?"
    Then print the spread of the averages (`means.std()`) for N = 4, 16, 64:
    0.25, 0.125, 0.0625 - it halves each time.
+   `.std()` is described in words as the square root of the variance,
+   the average squared distance from the mean,
+   so the "finite variance" of step 6 and the "variances add" note are defined before use.
    New: `.std()`. Active: predict.
 6. **Name it.**
    The student says in their own words what happened as N grew (collapsed answer).

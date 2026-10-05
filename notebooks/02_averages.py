@@ -91,7 +91,7 @@ runs = 10000
 # %% [markdown]
 # ## Lopsided runs: predict, then count
 #
-# Call a run **lopsided** if at least 3 in 4 of its tosses are heads,
+# Let's call a run **lopsided** if at least 3 in 4 of its tosses are heads,
 # that is, if its average is 0.75 or more.
 #
 # **Predict first:** which is more likely to be lopsided,
@@ -182,8 +182,11 @@ plt.show()
 # **Predict:** each time `N` is multiplied by 4, what happens to the width of the bell?
 # Does it shrink 4 times, 2 times, or not at all?
 #
-# `means.std()` measures the spread of the averages:
-# their standard deviation, the typical distance of an average from the center.
+# `means.std()` measures the spread of the averages.
+# It squares each average's distance from their mean,
+# averages the squares, and takes the square root.
+# The average of the squares is the variance;
+# its square root, the standard deviation, is back on the scale of the averages.
 
 # %%
 for N in [4, 16, 64]:

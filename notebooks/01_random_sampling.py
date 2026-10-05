@@ -150,7 +150,7 @@ plt.show()
 # The cell after next rolls 60 times and shades the range from 8 to 12 rolls.
 # This is an arbitrary but useful teaching band: plus or minus two rolls,
 # or 20%, around the expected count of 10 for each face.
-# Call a run **balanced** if all six bars end inside this chosen band,
+# Let's call a run **balanced** if all six bars end inside this chosen band,
 # that is, if every face came up between 8 and 12 times.
 # A run outside the band can still come from a fair die; this is not a test of fairness.
 #
