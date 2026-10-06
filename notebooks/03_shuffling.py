@@ -25,7 +25,6 @@
 # and the binomial table gave you the sampling distribution under the null hypothesis.
 # Most experiments come with no such table; this notebook builds one by shuffling.
 # Next, you implement a hypothesis test of your own.
-# The core path takes about 15 minutes.
 # Exercises marked *Stretch (optional)* can be skipped.
 #
 # Python practice: shuffling an array and splitting it into two groups, repeated in a loop.

@@ -21,7 +21,6 @@
 # **Takeaway: a histogram of a few rolls looks far less like the die than you would expect; only many rolls reveal it.**
 #
 # This is the first notebook of the series; the next one is the law of large numbers.
-# The core path takes about 15-20 minutes.
 # Exercises marked *Stretch (optional)* can be skipped.
 #
 # Python practice: drawing random samples with numpy.
@@ -205,6 +204,7 @@ print(many_rolls[:20])
 # %% [markdown]
 # The next cell looks at the first `N` of these rolls,
 # so changing `N` changes nothing else.
+# Choose a whole number from 1 to 6000; that is how many rolls are available.
 # The bars would grow with `N`,
 # so they now show the *proportion* of rolls (count divided by `N`) on a fixed scale.
 #
@@ -213,6 +213,7 @@ print(many_rolls[:20])
 
 # %%
 N = 60
+assert 1 <= N <= len(many_rolls), "Choose N between 1 and 6000, then rerun this cell."
 sample = many_rolls[:N]
 plt.figure(figsize=(5, 3))
 # density=True divides each count by N here, because every bar is 1 wide
@@ -229,6 +230,7 @@ plt.show()
 # (rerun this cell after changing `N`):
 
 # %%
+assert len(sample) == N, "Rerun the histogram cell with a valid N before computing this proportion."
 print((sample == 1).sum() / N)  # proportion of ones among the first N rolls
 print(1 / 6)
 

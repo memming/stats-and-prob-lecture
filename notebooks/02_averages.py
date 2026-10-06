@@ -25,7 +25,6 @@
 # this one shows why, and how fast.
 # Next, the coin worksheet uses a sampling distribution to test a claim,
 # and notebook 3 builds one by shuffling.
-# The core path takes about 15 minutes.
 # Exercises marked *Stretch (optional)* can be skipped.
 #
 # Python practice: repeating an experiment many times in one call, one row per run.
@@ -117,9 +116,11 @@ print((means_4 >= 0.75).mean())
 # %% [markdown]
 # **Your turn:** replace the `...` with the call for runs of 16 tosses,
 # using the line above as your model, then run the cell.
+# If you get stuck, open the answer below, replace `...`, and rerun this cell.
 
 # %%
 means_16 = ...  # 10000 runs of 16 tosses, one average per run
+assert means_16 is not Ellipsis, "Replace ... with the 16-toss sampling call. Open the answer below if you need help, then rerun this cell."
 print((means_16 >= 0.75).mean())
 
 # %% [markdown]
@@ -363,6 +364,9 @@ print("SE of the average:  ", trials.mean(axis=1).std())
 # > Which lowers it more: measuring each of the 5 mice three times, or using 10 mice?
 # > Simulate both: give each mouse a true volume (SD about 720 between mice)
 # > and add caliper error (SD 180) to each reading.
+# > **The normal model below gives negative true tumor volumes about 4% of the time.
+# > Real volumes cannot be negative; this teaching approximation is only for comparing
+# > how differences between mice and caliper error affect the SE.**
 #
 # <details>
 # <summary>Answer</summary>
