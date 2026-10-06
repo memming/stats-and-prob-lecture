@@ -23,7 +23,8 @@
 # This is the second notebook of the series.
 # Notebook 1 showed a histogram settling onto the probabilities as the rolls piled up;
 # this one shows why, and how fast.
-# The next notebook looks more closely at the bell you will meet here.
+# Next, the coin worksheet uses a sampling distribution to test a claim,
+# and notebook 3 builds one by shuffling.
 # The core path takes about 15 minutes.
 # Exercises marked *Stretch (optional)* can be skipped.
 #

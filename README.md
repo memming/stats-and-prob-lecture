@@ -54,6 +54,7 @@ paper and pencil, about 25 minutes.
 Source and instructor key: [worksheets/](worksheets/) (`make student`, `make key`).
 
 ### Shuffling and Permutation, how to break dependence
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/03_shuffling.ipynb)
 
 ### Implement your own hypothesis test
 This exercise is after the hands-on exercise.

@@ -20,8 +20,9 @@ and its step-6 answer promised that ten times more rolls gives about three times
 This notebook pays both off.
 It serves the `README.md` objective "apply the law of large numbers to averages",
 and covers the `README.md` section "Central limit theorem and Law of large numbers".
-Notebook 3, "Sampling distribution of the mean", now starts from the bell this notebook shows;
-what it adds is to be decided when it is designed.
+Next come the coin worksheet (`worksheets/coin_test.tex`)
+and notebook 3, shuffling (`design/03-shuffling.md`);
+the README no longer lists a separate notebook on the sampling distribution of the mean.
 
 ## Final observation
 
@@ -34,7 +35,9 @@ and four times more tosses make the bell half as wide."
 Repeating an experiment many times in one call:
 `rng.integers(0, 2, size=(runs, N))`, one row per run, then `.mean(axis=1)`, one average per run.
 Students write the `size=(runs, N)` call themselves (step 3).
-Later notebooks (sampling distributions, shuffling) reuse exactly this move.
+Notebook 3 (shuffling) does not reuse it:
+one call would need `np.tile`, `rng.permuted`, and 2-D slicing at once,
+so it repeats the shuffle in a `for` loop instead (`design/03-shuffling.md`, decision 4).
 
 ## Step ladder
 
