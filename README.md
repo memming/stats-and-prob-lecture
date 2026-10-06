@@ -62,11 +62,26 @@ Source and instructor key: [worksheets/](worksheets/) (`make student`, `make key
 ### Implement your own hypothesis test
 This exercise is after the hands-on exercise.
 
-## Day 2 afternoon:
+## Day 2 afternoon: Statistics and AI driver's license
 
-### Type-I, Type-II errors and staistical power
+Learning with AI: make the AI teach instead of tell, read code before trusting it,
+and check your understanding without AI.
+[Slides (PDF)](slides/day2_afternoon_learning_with_ai.pdf).
+
+### Reading code with AI: your morning test and an AI version
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/04_code_reading.ipynb)
+
+### Type-I, Type-II errors and statistical power
+The dealer's coin again: false accusations, the power curve, and the trade-off between α and β,
+each worked first without AI and then checked or extended with an AI step.
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/05_errors_and_power.ipynb)
+
+### Type I and Type II errors with real mice
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/06_real_data.ipynb)
+Data: [data/bdnf_mice.csv](data/bdnf_mice.csv) (Higuera, Gardiner & Cios 2015, CC BY 4.0).
 
 ### Invent your own procedure for multiple testing
+Optional, if time allows: the last slides before the wrap-up.
 
 ## Day 3 morning:
 
