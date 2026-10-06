@@ -40,6 +40,9 @@ companion for the simulation-first view of probability and inference.
 
 ## Day 1 morning
 
+### Conditioning is Zooming in
+https://catniplab.github.io/teaching/possible-worlds/
+
 ### Random sampling and histogram plotting
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/01_random_sampling.ipynb)
 
