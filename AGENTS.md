@@ -33,6 +33,9 @@ Until 2026-10-05 they were marimo WebAssembly notebooks;
 Layout: each notebook is `notebooks/NN_name.py` (jupytext `py:percent`, the source)
 paired with `notebooks/NN_name.ipynb` (what Colab opens),
 with one design note per notebook in `design/` under the same number.
+`diary/YYYY-MM-DD.md` is the teaching diary, one file per class day:
+what worked, timing, student questions, follow-ups.
+It is public like the rest of the repo, so it names no student and carries no detail that could identify one.
 The repo is public at https://github.com/memming/stats-and-prob-lecture,
 and students open notebooks from its `main` branch in Colab (`colab.md`, "Delivery").
 There is no `pyproject.toml` or build script.
