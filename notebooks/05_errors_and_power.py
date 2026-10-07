@@ -142,9 +142,10 @@
 # | after the first 10 flips | 0.022 |
 # | only after all 20 flips | 0.033 |
 # | in total | |
+# | if you test only once, after all 20 flips (≤ 5 or ≥ 15 heads) | 0.041 |
 #
 # - The dealer is honest. Can the total chance of an accusation be smaller than 0.022? Why?
-# - Add the two rows. Is the total still below 0.05?
+# - Add the first two rows. Is the total still below 0.05? Compare it with testing only once, after all 20 flips. Is peeking worth it?
 # - In the lab: p = 0.08 with 5 mice per group, so you add 5 more mice and test again. What is wrong?
 # - *Explain to a partner:* why "add mice until p < 0.05" is not allowed.
 
@@ -258,7 +259,7 @@ heads = (rng.random(size=(runs, 10)) < 0.7).sum(axis=1)
 #
 # <details><summary>Answer</summary>
 #
-# About 0.054: 0.022 at 10 flips plus 0.033 more at 20. Each test alone is below 0.05, but looking twice is not. Adding flips (or mice) until you can accuse keeps raising it.
+# About 0.054: 0.022 at 10 flips plus 0.033 more at 20. Testing only once at 20 flips gives 0.041, so looking twice adds false accusations and crosses 0.05, while the chance of catching the 70% cheater rises only from 0.42 to 0.44. Adding flips (or mice) until you can accuse keeps raising the false-accusation rate.
 #
 # </details>
 
@@ -266,4 +267,5 @@ heads = (rng.random(size=(runs, 10)) < 0.7).sum(axis=1)
 flips = rng.integers(0, 2, size=(runs, 20))
 first = flips[:, :10].sum(axis=1)
 total = flips.sum(axis=1)
-(accuse(first) | (total <= 5) | (total >= 15)).mean()
+print("peek:", (accuse(first) | (total <= 5) | (total >= 15)).mean())
+print("one test at 20 flips:", ((total <= 5) | (total >= 15)).mean())
