@@ -122,8 +122,9 @@
 # | Accused     |                      |                        |
 # | Not accused |                      |                        |
 #
-# - Of the accused dealers, what fraction cheat? Is this α? If not, what is it?
-# - Redo it with 100 flips per dealer (accuse on ≤ 39 or ≥ 61 heads: α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
+# - Of the accused dealers, what fraction cheat?
+# - The manager says: "We accused 35 of 1,000 dealers. That is 3.5%, less than 0.05, so this casino has no cheating problem." Is the manager right?
+# - Redo the fraction with 100 flips per dealer (accuse on ≤ 39 or ≥ 61 heads: α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
 # - *Explain to the class:* why "p < 0.05" does not mean "95% sure the effect is real".
 #
 # **Group B — Estimating the cheat from caught cheaters**
@@ -220,7 +221,7 @@ for n, lo, hi in [(10, 1, 9), (20, 5, 15), (50, 17, 33)]:
 #
 # <details><summary>Answer</summary>
 #
-# About 20 honest and 15 cheating dealers are accused, so only about 43% of accused dealers cheat. α is P(accused | honest) = 0.022; this is P(cheat | accused). With 100 flips: about 76%; with half the dealers cheating: about 87%.
+# About 20 honest and 15 cheating dealers are accused, so only about 43% of accused dealers cheat. The manager is wrong: 3.5% is not a p-value; if every dealer were honest the rule would accuse about 1,000 × 0.022 = 22, and 35 or more has probability about 0.006, so some dealers cheat. With 100 flips, 76% of the accused cheat; with half the dealers cheating, 87%.
 #
 # </details>
 
