@@ -123,12 +123,12 @@
 # | Not accused |                      |                        |
 #
 # - Of the accused dealers, what fraction cheat? Is this α? If not, what is it?
-# - Which helps more: 100 flips per dealer, or a casino where half the dealers cheat?
+# - Redo it with 100 flips per dealer (α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
 # - *Explain to the class:* why "p < 0.05" does not mean "95% sure the effect is real".
 #
 # **Group B — Estimating the cheat from caught cheaters**
-# Your rule catches the 70% coin only when it shows 9 or 10 heads.
-# - Among the cheaters you catch, what is the average heads rate? Use P(9) = 0.121 and P(10) = 0.028. Compare it with the true 0.70.
+# With 10 flips your rule catches the 70% coin only when it shows 9 or 10 heads. The rule changes with the number of flips, to keep α below 0.05: accuse on ≤ 5 or ≥ 15 heads with 20 flips, and on ≤ 39 or ≥ 61 heads with 100 flips.
+# - Among the cheaters you catch with 10 flips, what is the average heads rate? Use P(9) = 0.121 and P(10) = 0.028. Compare it with the true 0.70.
 # - Predict the average with 20 and with 100 flips.
 # - *Explain to the class:* why a small study that finds an effect usually overestimates it.
 #
