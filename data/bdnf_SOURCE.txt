@@ -1,0 +1,9 @@
+DATA SOURCE
+
+bdnf_raw.zip is a deliberately messy lab export (eight files, two formats and layouts, missing-value codes) of a subset of the "Mice Protein Expression" dataset:
+Higuera C, Gardiner KJ, Cios KJ (2015). Self-Organizing Feature Maps Identify Proteins Critical to Learning in a Mouse Model of Down Syndrome. PLoS ONE 10(6): e0129126.
+UCI Machine Learning Repository, DOI 10.24432/C50S3Z. Licence: CC BY 4.0.
+
+What the subset contains: 72 mice (38 control genotype, 34 Ts65Dn), each injected with memantine or saline, 15 measurements of BDNF protein level per mouse (1,080 rows). Columns: mouse_id, measurement (1-15), genotype, treatment, learning (C/S = context-shock, S/C = shock-context), BDNF. Three BDNF values are missing in the source.
+Changes: only the BDNF column is kept; the MouseID is split into mouse_id and measurement; values are rounded to 6 decimals.
+Rebuild: python preparation/prepare_real_data.py
