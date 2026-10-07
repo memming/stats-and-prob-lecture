@@ -3,6 +3,10 @@ This course is an introduction to data analysis emphasizing the nature of scienc
 
 Prerequisite: Computational Thinking and basic Python coding
 
+Instructors:
+ * Memming Park
+ * Hyungju Jeon
+
 ## Learning objectives:
  * Be able to reason with probabilistic statements;
  * See the world with conditional probability;
@@ -53,23 +57,18 @@ https://catniplab.github.io/teaching/possible-worlds/
 
 ### Hands-on exercises: Is the dealer trying to cheat with a loaded coin?
 [Worksheet (PDF)](https://github.com/memming/stats-and-prob-lecture/releases/download/day2-worksheet-2026/coin_test.pdf):
-paper and pencil, about 25 minutes.
-Source and instructor key: [worksheets/](worksheets/) (`make student`, `make key`).
+paper and pencil.
 
 ### Shuffling and Permutation, how to break dependence
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/03_shuffling.ipynb)
 
-### Implement your own hypothesis test
-This exercise is after the hands-on exercise.
-
 ## Day 2 afternoon:
 
-### Type-I, Type-II errors and staistical power
+Exercises prepared by Hyungju Jeon.
 
-### Invent your own procedure for multiple testing
 
 ## Day 3 morning:
 
-### Paired vs Unpaird t-test
-
 ### Power analysis
+
+### Experimental design
