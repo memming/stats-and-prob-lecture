@@ -59,7 +59,7 @@ def shuffle_test(control, treated):
 #
 # You plan to test whether a new drug lowers body temperature.
 # You will take the mice out of their home cages one at a time, inject them,
-# and measure each one's rectal temperature with a thermometer.
+# and measure each one's rectal temperature.
 #
 # Takao et al. (2016) measured about 1700 mice this way.
 # In a cage of four, the first mouse taken out was at about 36.1 C, the second 36.45, the third 36.7, the fourth 36.8:
@@ -94,7 +94,13 @@ labels = np.tile(["drug", "drug", "control", "control"], cages)  # first two cau
 print(labels)
 
 # %% [markdown]
-# Comparing the labels with a word picks out that group, as `rolls == 3` did in notebook 1.
+# Comparing the labels with a word gives one `True` or `False` per mouse, as `rolls == 3` did in notebook 1:
+
+# %%
+print(labels == "drug")
+
+# %% [markdown]
+# Put inside `temperature[...]`, that comparison keeps the temperatures where it is `True`: the drug group.
 # The last line tests one experiment:
 
 # %%
@@ -113,9 +119,9 @@ print(shuffle_test(temperature[group == "control"], temperature[group == "drug"]
 # %% [markdown]
 # ## How often does this experiment find a useless drug?
 #
-# The next cell repeats the experiment 1000 times, with the first two mice caught in each cage getting the drug.
+# The next cell repeats this experiment 1000 times.
 # It keeps each p-value and each estimated drug effect (the drug group's mean minus the control group's),
-# then draws a histogram of the estimated effects, with a black line at the true effect: none.
+# and draws a histogram of the estimated effects, with a black line at the true effect, zero.
 # It takes a few seconds.
 #
 # **Predict first:** how often will the test call this useless drug significant?
@@ -151,7 +157,7 @@ plt.show()
 # <summary>Answer</summary>
 #
 # About 20%, four times the 5% a fair test allows.
-# The histogram is not centered on 0 but near -0.45 C:
+# The histogram is not centered on 0 but near -0.47 C:
 # in almost every experiment the "drug" group comes out cooler.
 #
 # The test is not fooled: the groups really do differ.
@@ -215,8 +221,7 @@ print("drug:", position[group == "drug"].mean(), " control:", position[group == 
 # <details>
 # <summary>Answer</summary>
 #
-# Usually not exactly; run the cell again and the gap changes.
-# One random assignment leaves the groups a little different, now one way, now the other.
+# Usually not exactly, and the gap changes each time you rerun the cell, now one way, now the other.
 # Over many assignments the differences average out,
 # and the shuffle test allows for exactly this chance:
 # the about 5% of randomized experiments that reject are the draws that happened to be unbalanced.
@@ -255,8 +260,8 @@ for allocation in ["first caught", "random"]:
 #
 # First caught: more often, about 45% with 10 cages against about 20% with 5.
 # Random: about 5% both times.
-# More mice make each estimate less noisy, so the false offset of the first-caught allocation stands out more clearly:
-# the bias stays, the noise around it shrinks.
+# More mice shrink the noise around each estimate but not the first-caught allocation's false offset,
+# so the offset stands out more clearly.
 # No number of mice repairs a biased allocation.
 #
 # </details>
@@ -290,7 +295,7 @@ for allocation in ["first caught", "random"]:
 #   $P_0(p \le \alpha) \le \alpha$, the probability taken over the random assignments.
 #   Fisher (1935, p. 24): "the simple precaution of randomisation will suffice to guarantee the validity of the test of significance".
 #   When the labels were assigned at random, the shuffle test is also called a **randomization test**.
-# - One random assignment does not balance the groups exactly; on average it does, and the test allows for the rest.
+# - One random assignment balances the groups only on average, and the test allows for the rest.
 #   The ARRIVE guidelines for animal research go a step further:
 #   randomize within blocks, for example two drug and two control mice in every cage, chosen by chance,
 #   and then shuffle within cages (Percie du Sert et al., 2020, Box 4).
@@ -306,10 +311,10 @@ for allocation in ["first caught", "random"]:
 # %% [markdown]
 # ## Randomized, but who scores the mice?
 #
-# The same lab's next experiment is the fear-memory test of notebook 7:
-# a drug given after training, and freezing scored by eye from video, as a percentage of time.
-# The groups are randomized properly this time, and the drug does nothing:
-# both groups freeze 50% of the time on average, with a standard deviation of 17 points, as in notebook 7.
+# The same lab's next experiment is notebook 7's fear-memory test,
+# with freezing scored by eye from video, as a percentage of time.
+# The groups are randomized properly, and the drug does nothing:
+# both groups freeze 50% of the time on average, with a standard deviation of 17 points.
 # But the person scoring the videos knows which mice got the drug, and expects them to freeze less.
 #
 # **The simulation shades each drug-treated mouse's score 4 points lower, without anyone meaning to.
@@ -426,9 +431,9 @@ print(f"Sample size: a difference of {difference} in {outcome} is the smallest c
 # and write the design so that an approval committee can check it.
 #
 # Shortcuts in allocation are old.
-# In 1930, 20000 schoolchildren in Lanarkshire took part in a study of milk at school: 10000 got milk, 10000 did not.
-# Teachers then swapped some of the children "in order to obtain a more level selection".
-# The swaps left the children without milk heavier and taller than the milk children before the study began,
+# In 1930, a study of milk at school in Lanarkshire gave milk to 10000 of 20000 schoolchildren.
+# Teachers then swapped some children "in order to obtain a more level selection".
+# After the swaps, the children without milk were heavier and taller than the milk children before the study began,
 # probably because the teachers, without meaning to, gave the milk to the poorer children (Student, 1931).
 # Before trusting any comparison, ask the question Cobb (2007) asks students to ask of every study:
 # "Where was the randomization, and what inferences does it support?"

@@ -54,11 +54,15 @@ print(np.concatenate([lean_control, lean_treated]))
 
 # %% [markdown]
 # The next cell puts notebook 3's shuffle loop inside a function,
-# so that one line can run the whole test on any two groups.
+# so that one line runs the whole test on any two groups.
+# It returns the p-value: the fraction of shuffles that do at least as well as the real labels.
 # Two changes from notebook 3.
-# It counts both directions, as most papers do and as published sample sizes assume.
-# And it uses 1000 shuffles instead of 10000, to keep the rest of this notebook fast.
-# The last line runs it on the lean mice; notebook 3's two-sided answer was 4/252, about 0.016.
+# It counts both directions, positive and negative differences,
+# as most papers do and as published sample sizes assume.
+# And it uses 1000 shuffles instead of 10000, to keep this notebook fast.
+# The last line runs it on the lean mice.
+# Each of notebook 3's 2 splits (out of 252) has a mirror image with the groups swapped and the sign flipped,
+# so both directions give 4/252, about 0.016.
 
 # %%
 def shuffle_test(control, treated):
@@ -116,8 +120,8 @@ print(shuffle_test(control, treated))
 # Five mice per group differ so much by chance that a drug lowering freezing by 19 points is sometimes hidden.
 # Each run is one experiment you might have done.
 #
-# If a drug-treated mouse ever froze a negative fraction of the time:
-# that is the bell curve's tail, about 1 drug-treated mouse in 30.
+# A drug-treated mouse that freezes a negative fraction of the time
+# comes from the bell curve's tail, about 1 drug-treated mouse in 30.
 # Real freezing stays between 0 and 100%; cutting the bell off there barely changes the answers below.
 #
 # </details>
@@ -150,8 +154,17 @@ p_values = np.array(p_values)  # an array, so that one comparison checks every e
 print(p_values[:10])  # the first ten experiments
 
 # %% [markdown]
-# **Your turn:** replace the `...` with the fraction of experiments whose p-value is at most 0.05,
-# using notebook 3's compare-then-average move, then run the cell.
+# Which of these ten experiments detected the drug?
+# Compare them all with 0.05 at once, as notebook 1 compared every roll with 3:
+
+# %%
+print(p_values[:10] <= 0.05)
+
+# %% [markdown]
+# **Your turn:** replace the `...` with the fraction of all 1000 experiments whose p-value is at most 0.05.
+# Compare as above, but every experiment, then take `.mean()`:
+# each `True` counts as 1 and each `False` as 0, so the mean is the fraction of `True`s.
+# Then run the cell.
 # If you get stuck, open the answer below, replace `...`, and rerun this cell.
 
 # %%
@@ -173,8 +186,7 @@ print(power)
 # in one survey, 89% of 214 psychology researchers overestimated the power of research designs
 # with a small expected effect (Bakker et al., 2016).
 #
-# Every experiment that missed had the same working drug.
-# A p-value above 0.05 here never means that the drug does nothing;
+# So a p-value above 0.05 here never means that the drug does nothing;
 # it means that this experiment did not detect it (Greenland et al., 2016).
 # A p-value counts shuffles; this fraction counts experiments.
 #
@@ -184,7 +196,7 @@ print(power)
 # ## More mice, more often
 #
 # The usual target is to detect the effect in 80% of experiments.
-# The next cell repeats the 1000-experiment loop for 5, 10, 15, 20, and 30 mice per group,
+# The next cell repeats the loop for 5, 10, 15, 20, and 30 mice per group,
 # with 500 experiments each to save time, and plots the fraction that detect the drug.
 # It takes up to half a minute.
 #
@@ -293,10 +305,9 @@ plt.show()
 # (Lehr's rule; van Belle, 2008, Section 2.1).
 # Here $16 \times 17^2 / 19^2 \approx 12.8$;
 # the simulation needed about 14, because the rule treats $\sigma$ as known.
-# The rule says what the simulation would take long to show:
-# halve the difference worth finding, and you need four times the mice.
-# Notebook 2 gives the reason: the spread of an average shrinks like $1/\sqrt{n}$,
-# so halving the spread takes four times the mice.
+# The rule shows at a glance what the simulation would take long to show:
+# halve the difference worth finding, and you need four times the mice,
+# because the spread of an average shrinks like $1/\sqrt{n}$ (notebook 2).
 #
 # **Sample-size planning**, also called a priori power analysis, fixes before the experiment:
 # the smallest difference worth finding, a spread taken from earlier experiments,
@@ -319,8 +330,8 @@ plt.show()
 #
 # **Predict first, from the rule of thumb:** how many mice per group?
 # Write your number down, then run the next cell.
-# It repeats the loop of the previous section with these values,
-# 300 experiments for each of 50 to 300 mice per group, and takes up to half a minute.
+# It repeats the loop with these values, 300 experiments for each of 50 to 300 mice per group,
+# and takes up to half a minute.
 
 # %%
 n_values = [50, 100, 200, 300]  # mice per group
@@ -374,8 +385,7 @@ plt.show()
 # For the t-test, `statsmodels.stats.power.TTestIndPower` and the free program G\*Power give the answer in one call;
 # the simulation works for any test, the shuffle test included.
 #
-# Power is for planning.
-# Computed for an experiment already done, at its own observed difference, it only restates the p-value.
+# Power is for planning: computed for an experiment already done, it only restates the p-value.
 # Small experiments that do reach $p \le 0.05$ overstate the effect,
 # because only the lucky ones get there (Button et al., 2013); the first stretch below shows it.
 # And small experiments are common:
