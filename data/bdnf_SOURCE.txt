@@ -1,6 +1,6 @@
 DATA SOURCE
 
-bdnf_mice.csv is a subset of the "Mice Protein Expression" dataset:
+bdnf_raw.zip is a deliberately messy lab export (eight files, two formats and layouts, missing-value codes) of a subset of the "Mice Protein Expression" dataset:
 Higuera C, Gardiner KJ, Cios KJ (2015). Self-Organizing Feature Maps Identify Proteins Critical to Learning in a Mouse Model of Down Syndrome. PLoS ONE 10(6): e0129126.
 UCI Machine Learning Repository, DOI 10.24432/C50S3Z. Licence: CC BY 4.0.
 

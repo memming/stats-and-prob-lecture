@@ -77,9 +77,11 @@ Questions are on the slides and answered on paper; the notebook checks the answe
 and holds the AI prompts.
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/05_errors_and_power.ipynb)
 
-### Type I and Type II errors with real mice
+### AI-assisted data analysis with real mice
+A messy lab export of real data (BDNF in mouse cortex): clean the files, look at the data, form a hypothesis, test it, and show the result.
+The AI writes the code at each step; students decide and check, and compare with "vibe research" (asking the AI to just analyse the data).
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/06_real_data.ipynb)
-Data: [data/bdnf_mice.csv](data/bdnf_mice.csv) (Higuera, Gardiner & Cios 2015, CC BY 4.0).
+Data: [data/bdnf_raw.zip](data/bdnf_raw.zip) (Higuera, Gardiner & Cios 2015, CC BY 4.0).
 
 ### Invent your own procedure for multiple testing
 Optional, if time allows: the last slides before the wrap-up.
