@@ -79,7 +79,7 @@ and holds the AI prompts.
 
 ### AI-assisted data analysis with real mice
 A messy lab export of real data (BDNF in mouse cortex): clean the files, look at the data, form a hypothesis, test it, and show the result.
-The AI writes the code at each step; students decide and check, and compare with "vibe research" (asking the AI to just analyse the data).
+The AI writes the code at each step; students decide and check.
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/06_real_data.ipynb)
 Data: [data/bdnf_raw.zip](data/bdnf_raw.zip) (Higuera, Gardiner & Cios 2015, CC BY 4.0).
 

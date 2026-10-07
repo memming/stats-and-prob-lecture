@@ -20,24 +20,14 @@
 #
 # **Takeaway: the AI can do every step fast; you decide what to test, what counts as one observation, and you check each step.**
 # Data: BDNF protein in mouse cortex from a Down syndrome mouse model, as a messy lab export (Higuera, Gardiner & Cios 2015, PLoS ONE; UCI, CC BY 4.0).
-# Steps: 0 vibe research, 1 clean the files, 2 look at the data, 3 your hypothesis, 4 test it, 5 show the result.
+# Steps: 1 clean the files, 2 look at the data, 3 your hypothesis, 4 test it, 5 show the result.
 # At each step the AI writes the code; you paste it into the empty cell, run it, and check it.
 #
 # **Start here:** save your own copy with *File > Save a copy in Drive*, so your edits are kept.
 
 # %% [markdown]
-# **AI step.** **Step 0 — vibe research (the baseline).** Download `bdnf_raw.zip` (link below), upload it to your AI chat, and paste:
-# ```
-# Analyse this data and tell me what it shows.
-# ```
-# Copy its main claim into the next cell. You will compare it with your own analysis at the end.
-
-# %% [markdown]
-# *The AI's main claim:*
-
-# %% [markdown]
 # ## Load the files
-# Run the next cell. It downloads `bdnf_raw.zip` from the course repository, unzips it, and shows the README and the first lines of every file. [Download the zip](https://github.com/memming/stats-and-prob-lecture/raw/main/data/bdnf_raw.zip) for step 0.
+# Run the next cell. It downloads `bdnf_raw.zip` from the course repository, unzips it, and shows the README and the first lines of every file.
 
 # %%
 import io, pathlib, urllib.request, zipfile
@@ -167,7 +157,6 @@ else:
 # ```
 # Here is my conclusion: [paste]. Act as a critical reviewer. Find the weakest claim and ask me to fix it. Do not rewrite it.
 # ```
-# Finally, compare with step 0: where did the vibe-research answer and your analysis differ? Which do you trust, and why?
 
 # %% [markdown]
-# *Your conclusion, and the comparison with step 0:*
+# *Your conclusion:*
