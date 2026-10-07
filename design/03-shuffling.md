@@ -125,11 +125,13 @@ does not answer step 1's question if allocation could have followed the tumors).
    Chung and Romano 2013, Ann. Statist. 41:484-507, Sec. 1 and Thm 2.2, https://doi.org/10.1214/13-AOS1090;
    Lehmann and Romano, Thm 15.2.5, pp. 642-643.
 
-The notebook's "For deeper mathematics" line cites Ernst 2004, Sections 3-4:
-free, short, it proves exactness by counting, separates random assignment from random sampling,
-and gives the +1 formula.
-Not Wasserman Sec. 10.5, which matches notebook 2's citation style
-but has no proof and counts with a strict ">" and no +1 (see Rejected).
+Since 2026-10-07 (see "Revision 2026-10-07") the notebook states these claims in plain words, without citations:
+claim 1 as "every way of choosing which five mice carry the drug label is equally likely",
+claim 2 only as "never report p = 0",
+and claim 3 as the hint that the difference in means is one statistic among many.
+The sources above remain the authority for those sentences.
+Until then, a "For deeper mathematics" line cited Ernst 2004, Sections 3-4
+(not Wasserman Sec. 10.5, which has no proof and counts with a strict ">" and no +1; see Rejected).
 
 ## Step ladder
 
@@ -186,20 +188,26 @@ A setup cell creates `rng = np.random.default_rng(20261005)` once;
    and the one swapping the 257 and 83 mm^3 tumors: 2/252 = 0.008.
    Collapsed "Why whole numbers? (optional)": the floating-point reason (see Data),
    with `diffs >= observed - 1e-9` for decimal data.
-   Collapsed "Why some add 1 (optional)": claim 2 above, with "valid" defined
-   (rejects a true null at most 5% of the time at the 0.05 level);
-   if no shuffle reaches the observed difference, the rule gives 1/10001, never 0.
+   Collapsed "What if no shuffle does as well? (optional)":
+   the line prints 0.0, but 10000 shuffles cannot show a p-value below about 1 in 10000;
+   report it as below 0.0001, never p = 0 (notebook 8 relies on this sentence).
+   It replaced "Why some add 1 (optional)", the +1 formula with "valid" defined, on 2026-10-07.
    New: none beyond the p-value as a count of shuffles. Active: fill one line.
 5. **Name it.**
    The student says in their own words what the shuffles showed (collapsed answer).
    Then the names:
    the **null hypothesis of independence** (tumor volume does not depend on the antibody),
-   under which the ten values are **exchangeable** and every labeling is equally likely (claim 1);
+   under which every way of choosing the five drug mice is equally likely (claim 1, without the word "exchangeable");
    the **permutation test**, also called a shuffle or randomization test:
    the worksheet's recipe with shuffling in its step 3;
    the formula, p = (number of shuffles with a difference at least as large as the observed one) / (number of shuffles).
-   One sentence on claim 3: the test asks whether the label matters at all, not only whether the means differ.
-   **For deeper mathematics:** Ernst 2004, Sections 3-4.
+   Claim 3 as a hint at testing more than the mean, and at power:
+   the label must not matter at all, so the same shuffles work for any statistic
+   (medians, spread, ...); each statistic catches some effects better than others;
+   a drug that shrinks some tumors and enlarges others can leave the mean unchanged,
+   and the difference in means then flags it hardly more often than a useless drug;
+   the statistic that matches the expected effect gives more **power** (named here, defined in notebook 5);
+   choose it before seeing the data.
 6. **Worked transfer: the same drug in obese mice.**
    An ungated cell prints the obese volumes and their difference first, as step 1 did,
    so the prediction can use the spread (added after the review).
@@ -403,3 +411,24 @@ the second extreme lean split described as a swap; scipy's two-sided default;
 the teaser "Each piece has a name" deleted.
 Not yet done: opening the notebook from its Colab link in a signed-in browser
 (form fields, collapsed answers, both plots, the gates).
+
+## Revision 2026-10-07
+
+Memming asked to remove the deeper mathematics
+and to hint at testing more than the mean and its relation to statistical power.
+This narrows the 2026-10-05 scope ("exchangeability, and exactness cited rigorously"); the sources stay in Rigor.
+Removed from the notebook:
+the "For deeper mathematics" paragraph (Ernst 2004; Lehmann and Romano);
+the word "exchangeable" and its definition, and "given these ten volumes";
+the "Why some add 1 (optional)" note (+1 formula, validity, Ernst and Phipson-Smyth),
+replaced by "What if no shuffle does as well? (optional)", which keeps "never p = 0";
+the Romano / Chung-Romano bullet on exactness under unequal spreads, replaced by the hint (step 5);
+and the variance arithmetic behind the noise-correlation stretch's 1/6.
+Kept: "Why 252?" (counting with the worksheet's "n choose k"; notebook 4 asks for the exact 4/252)
+and "Why whole numbers?" (notebooks 7 and 8 cite it).
+
+The hint's claim was checked by simulation (normal tumors, 5 vs 5, all 252 splits, two-sided, 0.05, 4000 experiments, seed 20261007):
+same mean, treated SD three times the control SD: the difference in means rejected 7.1%, the difference in SDs 32%;
+with no effect at all, 5.3% and 4.4%.
+So "hardly more often than a drug that does nothing" holds for the difference in means.
+Only markdown changed; no code cell did.

@@ -231,18 +231,11 @@ print(p_value)
 # </details>
 #
 # <details>
-# <summary>Why some add 1 (optional)</summary>
+# <summary>What if no shuffle does as well? (optional)</summary>
 #
-# The real labeling is itself one of the possible shuffles.
-# Counting it, $p = (1 + b)/(1 + m)$, where $b$ of $m$ shuffles are at least as extreme.
-# This p-value is valid for any number of shuffles:
-# a test that rejects when $p \le 0.05$ rejects a true null hypothesis at most 5% of the time
-# (Ernst 2004, Statistical Science, Section 4.2;
-# Phipson and Smyth 2010, Statistical Applications in Genetics and Molecular Biology).
-# With 10000 shuffles it differs from yours by at most 0.0001.
-# The difference matters when no shuffle reaches the real difference:
-# the rule then gives $p = 1/10001$, about 0.0001, the smallest p-value 10000 shuffles can show.
-# Never report $p = 0$.
+# Then the line prints 0.0, but the p-value is not 0:
+# 10000 shuffles cannot show a p-value smaller than about 1 in 10000.
+# Report it as below 0.0001, never as $p = 0$.
 #
 # </details>
 
@@ -265,11 +258,8 @@ print(p_value)
 #
 # - The **null hypothesis of independence**: tumor volume does not depend on which antibody the mouse got.
 #   Under it, and if the mice that got the drug were picked without regard to their tumors,
-#   the ten volumes are **exchangeable**:
-#   reordering them does not change how likely they are,
-#   so every one of the 252 labelings is equally likely.
-#   That is why the shuffled differences, given these ten volumes,
-#   are the sampling distribution under the null hypothesis,
+#   every way of choosing which five mice carry the drug label is equally likely.
+#   That is why the shuffled differences are the sampling distribution under the null hypothesis,
 #   step 3 of your worksheet recipe.
 # - The worksheet recipe with shuffling in step 3 is the **permutation test**,
 #   also called a shuffle test or randomization test.
@@ -277,16 +267,18 @@ print(p_value)
 #
 #   $$p = \frac{\text{number of shuffles with a difference at least as large as the observed one}}{\text{number of shuffles}}.$$
 #
-# - The null hypothesis says the label does not matter at all, which is stronger than "the means are equal".
-#   If two groups differ in spread but not in mean,
-#   the shuffle test of the difference in means is no longer exact:
-#   it can reject equal means more often than its level promises
-#   (Romano 1990, JASA; Chung and Romano 2013, Annals of Statistics).
-#
-# **For deeper mathematics:** Ernst (2004), "Permutation methods: a basis for exact inference",
-# *Statistical Science* 19:676-685, Sections 3-4, proves by counting why the permutation test is exact,
-# separates random assignment from random sampling, and derives the add-one rule.
-# Lehmann and Romano, *Testing Statistical Hypotheses*, Section 15.2, gives the general theorem.
+# - The null hypothesis says the label does not matter at all, not only that the two means are equal.
+#   So the difference in means is one choice among many:
+#   the same shuffles work for the difference in medians, in spread,
+#   or any other number computed from the two groups.
+#   Each choice catches some kinds of effect better than others.
+#   A drug that shrank some tumors and enlarged others could leave the mean unchanged;
+#   the difference in means would then flag it hardly more often than a drug that does nothing,
+#   while a difference in spread could catch it.
+#   The chance that a test catches a real effect is its **power**, the topic of notebook 5 this afternoon:
+#   comparing the groups on what you expect the drug to change gives the test more power.
+#   Choose what to compare before seeing the data;
+#   trying several and keeping the smallest p-value makes chance look like an effect.
 
 # %% [markdown]
 # ## The same drug in obese mice: almost as large a difference
@@ -444,8 +436,7 @@ print("p-value:", (diffs_obese >= observed_obese).mean())
 # print(observed_r, (rs >= observed_r).mean())
 # ```
 #
-# Each simulated count has variance $1 + 5 = 6$, of which the shared input contributes 1,
-# so the true correlation is $1/6 \approx 0.17$.
+# The three lines were set up so that the true correlation is about 0.17.
 # Your observed correlation is likely somewhere between 0.05 and 0.3,
 # and in about 3 of 4 simulated sessions the p-value falls below 0.05.
 # Rerun the three simulation lines and the test a few times:
