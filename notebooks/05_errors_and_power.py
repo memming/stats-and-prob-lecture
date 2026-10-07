@@ -54,7 +54,7 @@
 #
 # How often does your rule accuse this cheater? How often does the cheater get away?
 #
-# 4. Your group computes P(accuse) for one more coin: 60%, 80%, or 90% heads. Use P(9 heads) = 10 · p⁹ · (1 − p) and P(10 heads) = p¹⁰ (0 and 1 heads are tiny). Sketch P(accuse) against how often the coin lands heads. Where does the curve start?
+# 4. Compute P(accuse) for coins with 60%, 80%, and 90% heads. Use P(9 heads) = 10 · p⁹ · (1 − p) and P(10 heads) = p¹⁰ (0 and 1 heads are tiny). Sketch P(accuse) against how often the coin lands heads. Where does the curve start?
 
 # %% [markdown]
 # *Your answer:*
@@ -108,12 +108,12 @@
 # *Your answer:*
 
 # %% [markdown]
-# ## Part 4 (optional) — Three questions, three groups
-# If time allows. Your group takes one question.
+# ## Part 4 (optional) — Three harder questions
+# If time allows. Everyone works through all three.
 #
-# **Steps.** 1. Work it out on paper, AI closed (5 minutes). 2. Check it with the AI tutor below (5 minutes). 3. Explain it to the class without notes (2 minutes): say the answer, how you got it, and what it means for research.
+# **For each question:** 1. Work it out on paper, AI closed. 2. Check your answer with the AI tutor below. 3. Explain it to a partner without notes: the answer, how you got it, and what it means for research.
 #
-# **Group A — How many accused dealers are cheaters?**
+# **A — How many accused dealers are cheaters?**
 # In this casino, 1 in 10 dealers cheats with the 70% coin. You watch 10 flips of each of 1,000 dealers and use your rule.
 # - Fill in the table: how many honest dealers do you accuse, and how many cheaters?
 #
@@ -125,16 +125,16 @@
 # - Of the accused dealers, what fraction cheat?
 # - The manager says: "We accused 35 of 1,000 dealers. That is 3.5%, less than 0.05, so this casino has no cheating problem." Is the manager right?
 # - Redo the fraction with 100 flips per dealer (accuse on ≤ 39 or ≥ 61 heads: α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
-# - *Explain to the class:* why "p < 0.05" does not mean "95% sure the effect is real".
+# - *Explain to a partner:* why "p < 0.05" does not mean "95% sure the effect is real".
 #
-# **Group B — Estimating the cheat from caught cheaters**
+# **B — Estimating the cheat from caught cheaters**
 # All cheaters use the 70% coin. You estimate each caught cheater's coin from its heads (9 heads of 10 → 0.9). The rule changes with the number of flips, to keep α below 0.05: accuse on ≤ 1 or ≥ 9 heads with 10 flips, ≤ 5 or ≥ 15 with 20, and ≤ 39 or ≥ 61 with 100.
 # - With 10 flips you catch cheaters only at 9 or 10 heads (P = 0.121 and 0.028). What is the average estimate among the cheaters you catch?
 # - The truth is 0.70. Do caught cheaters look more or less biased than they are? Predict the average with 20 and with 100 flips.
 # - In the lab: a study with 5 mice per group finds a significant effect. Is the reported effect likely too big, too small, or right?
-# - *Explain to the class:* why a small study that finds an effect usually overestimates it.
+# - *Explain to a partner:* why a small study that finds an effect usually overestimates it.
 #
-# **Group C — Peeking**
+# **C — Peeking**
 # Step 1: watch 10 flips; accuse on ≤ 1 or ≥ 9 heads. Step 2: if not accused, watch 10 more; accuse if all 20 flips show ≤ 5 or ≥ 15 heads. Each step alone keeps α below 0.05.
 #
 # | You accuse an honest dealer … | Probability |
@@ -146,7 +146,7 @@
 # - The dealer is honest. Can the total chance of an accusation be smaller than 0.022? Why?
 # - Add the two rows. Is the total still below 0.05?
 # - In the lab: p = 0.08 with 5 mice per group, so you add 5 more mice and test again. What is wrong?
-# - *Explain to the class:* why "add mice until p < 0.05" is not allowed.
+# - *Explain to a partner:* why "add mice until p < 0.05" is not allowed.
 
 # %% [markdown]
 # *Your answer:*
@@ -154,7 +154,7 @@
 # %% [markdown]
 # **AI step.** Check and go deeper with the AI tutor:
 # ```
-# I am learning [your group's question]. Here is my answer: [paste]. Do not give me the answer. Tell me what is right and what is wrong, then ask me one question at a time.
+# I am learning [the question]. Here is my answer: [paste]. Do not give me the answer. Tell me what is right and what is wrong, then ask me one question at a time.
 # ```
 
 # %% [markdown]
@@ -226,7 +226,7 @@ for n, lo, hi in [(10, 1, 9), (20, 5, 15), (50, 17, 33)]:
 # </details>
 
 # %% [markdown]
-# ### Group A: who is accused?
+# ### Question A: who is accused?
 #
 # <details><summary>Answer</summary>
 #
@@ -241,7 +241,7 @@ heads = (rng.random(size=(runs, 10)) < p_heads[:, None]).sum(axis=1)
 cheat[accuse(heads)].mean()
 
 # %% [markdown]
-# ### Group B: caught cheaters look worse than they are
+# ### Question B: caught cheaters look worse than they are
 #
 # <details><summary>Answer</summary>
 #
@@ -254,7 +254,7 @@ heads = (rng.random(size=(runs, 10)) < 0.7).sum(axis=1)
 (heads[accuse(heads)] / 10).mean()
 
 # %% [markdown]
-# ### Group C: peeking
+# ### Question C: peeking
 #
 # <details><summary>Answer</summary>
 #

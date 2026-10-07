@@ -19,7 +19,7 @@ Each part is worked first with AI closed; then an AI step checks or extends it.
 
 1. α from the fair-coin table: 0.022, not 0.05, because heads come in whole numbers.
 2. The two errors; a prediction (can β be one number?);
-   β for a 70% coin (0.85); groups compute the power curve
+   β for a 70% coin (0.85); everyone computes the power curve
    (0.048, 0.15, 0.38, 0.74 for 60%, 70%, 80%, 90% heads).
    AI step: the student writes their own idea, then asks an AI tutor whether β can be one number.
    In the pilot, tutors led to ideas students had not met
@@ -28,7 +28,7 @@ Each part is worked first with AI closed; then an AI step checks or extends it.
    The α–β trade-off (accuse also on 2 or 8 heads: α 0.109, power 0.38);
    AI step: an HTML page with a movable rejection region.
    AI step: the student explains Type I and Type II errors to the AI and gets feedback only at the end.
-4. Optional, three groups: how many accused dealers cheat (43% when 1 in 10 cheats);
+4. Optional, three harder questions for everyone: how many accused dealers cheat (43% when 1 in 10 cheats);
    caught cheaters overestimate the cheat (0.92 instead of 0.70);
    peeking after 10 more flips raises α to 0.054.
 5. Code checks for every answer.
