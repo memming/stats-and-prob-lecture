@@ -128,15 +128,24 @@
 # - *Explain to the class:* why "p < 0.05" does not mean "95% sure the effect is real".
 #
 # **Group B — Estimating the cheat from caught cheaters**
-# With 10 flips your rule catches the 70% coin only when it shows 9 or 10 heads. The rule changes with the number of flips, to keep α below 0.05: accuse on ≤ 5 or ≥ 15 heads with 20 flips, and on ≤ 39 or ≥ 61 heads with 100 flips.
-# - Among the cheaters you catch with 10 flips, what is the average heads rate? Use P(9) = 0.121 and P(10) = 0.028. Compare it with the true 0.70.
-# - Predict the average with 20 and with 100 flips.
+# All cheaters use the 70% coin. You estimate each caught cheater's coin from its heads (9 heads of 10 → 0.9). The rule changes with the number of flips, to keep α below 0.05: accuse on ≤ 1 or ≥ 9 heads with 10 flips, ≤ 5 or ≥ 15 with 20, and ≤ 39 or ≥ 61 with 100.
+# - With 10 flips you catch cheaters only at 9 or 10 heads (P = 0.121 and 0.028). What is the average estimate among the cheaters you catch?
+# - The truth is 0.70. Do caught cheaters look more or less biased than they are? Predict the average with 20 and with 100 flips.
+# - In the lab: a study with 5 mice per group finds a significant effect. Is the reported effect likely too big, too small, or right?
 # - *Explain to the class:* why a small study that finds an effect usually overestimates it.
 #
 # **Group C — Peeking**
-# You watch 10 flips. If you cannot accuse, you watch 10 more and accuse if all 20 flips show 5 or fewer, or 15 or more heads. Each test alone keeps α below 0.05.
-# - Can the chance of accusing an honest dealer be smaller than 0.022? Estimate it: is it still below 0.05?
-# - What happens if you keep adding 10 flips until you can accuse?
+# Step 1: watch 10 flips; accuse on ≤ 1 or ≥ 9 heads. Step 2: if not accused, watch 10 more; accuse if all 20 flips show ≤ 5 or ≥ 15 heads. Each step alone keeps α below 0.05.
+#
+# | You accuse an honest dealer … | Probability |
+# |---|---|
+# | after the first 10 flips | 0.022 |
+# | only after all 20 flips | 0.033 |
+# | in total | |
+#
+# - The dealer is honest. Can the total chance of an accusation be smaller than 0.022? Why?
+# - Add the two rows. Is the total still below 0.05?
+# - In the lab: p = 0.08 with 5 mice per group, so you add 5 more mice and test again. What is wrong?
 # - *Explain to the class:* why "add mice until p < 0.05" is not allowed.
 
 # %% [markdown]
