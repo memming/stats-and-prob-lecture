@@ -20,8 +20,8 @@
 #
 # **Takeaway: the AI can do every step fast; you decide what to test, what counts as one observation, and you check each step.**
 # Data: BDNF protein in mouse cortex from a Down syndrome mouse model, as a messy lab export (Higuera, Gardiner & Cios 2015, PLoS ONE; UCI, CC BY 4.0).
-# Steps: 1 clean the files, 2 look at the data, 3 your hypothesis, 4 test it, 5 show the result.
-# At each step the AI writes the code; you paste it into the empty cell, run it, and check it.
+# Steps: 1 clean the files, 2 look at the data, 3 your hypothesis, 4 test it, 5 show the result, 6 say what it means.
+# Every step has three parts: **you decide** first, **the AI writes the code** (paste it into the empty cell and run it), and **you check** it.
 #
 # **Start here:** save your own copy with *File > Save a copy in Drive*, so your edits are kept.
 
@@ -52,7 +52,13 @@ for f in sorted(pathlib.Path("bdnf_raw").glob("*_*")):
 
 # %% [markdown]
 # ## Step 1 — clean the files with AI
-# Paste the README and the output above into your AI chat, with:
+# **You decide first.** In the next cell, write what the clean table must hold: its columns, how many mice and readings (see the README), and how missing readings should look.
+
+# %% [markdown]
+# *What the clean table must hold:*
+
+# %% [markdown]
+# **AI.** Paste the README and the output above into your AI chat, with:
 # ```
 # Write pandas code that reads all these files into one long table called d, with columns mouse_id, genotype, treatment, learning, reading, BDNF (one row per reading). Missing readings must become NaN. List every problem in the files that your code handles. The files are in the folder bdnf_raw.
 # ```
@@ -73,10 +79,33 @@ if "d" in globals():
 else:
     print("Run your step 1 code first: it must create the table d.")
 
+# %% [markdown]
+# **Spot-check one mouse by hand.** The next cell picks one mouse and shows its rows in your table next to its raw file. Are the 15 values the same?
+
+# %%
+if "d" in globals():
+    mouse = d.mouse_id.drop_duplicates().sample(1, random_state=7).item()
+    print(d[d.mouse_id == mouse].to_string())
+    for f in pathlib.Path("bdnf_raw").glob("*_*"):
+        if f.suffix == ".xlsx":
+            raw = pd.read_excel(f)
+            hit = raw[raw.iloc[:, 0].astype(str) == mouse]
+            if len(hit):
+                print("=====", f.name); print(hit.to_string())
+        else:
+            for line in f.read_text().splitlines():
+                if line.split("	")[0] in (mouse, "M" + mouse):
+                    print("=====", f.name); print(line)
 
 # %% [markdown]
 # ## Step 2 — look at the data
-# Ask the AI:
+# **You decide first.** What will you plot? What is one dot? What goes on each axis? Sketch it on paper.
+
+# %% [markdown]
+# *Your plot plan:*
+
+# %% [markdown]
+# **AI.** Describe your sketch to the AI, or use:
 # ```
 # Write matplotlib code for the table d: one column of points per group (genotype, treatment, learning). Show each mouse's 15 readings as small dots and the mouse's mean as a larger dot.
 # ```
@@ -86,7 +115,7 @@ else:
 # Paste the AI's plotting code here.
 
 # %% [markdown]
-# **Look.** Do the 15 readings of one mouse sit together? Which groups look different from each other? What counts as one observation here: a reading or a mouse?
+# **Check.** Is the plot what you asked for? Count the mean dots in one group: does it match the number of mice in that group (step 1 check)? Then look: do the 15 readings of one mouse sit together? Which groups look different? What counts as one observation here: a reading or a mouse?
 
 # %% [markdown]
 # *Your notes:*
@@ -98,13 +127,20 @@ else:
 # ```
 # Here is my analysis plan: [paste]. Find the weakest point. Do not write code.
 # ```
+# **You decide.** Keep or change your plan, and write why.
 
 # %% [markdown]
-# *Your plan:*
+# *Your plan, and what you kept or changed:*
 
 # %% [markdown]
 # ## Step 4 — test it
-# Ask the AI:
+# **You predict first.** Roughly what p do you expect, and why?
+
+# %% [markdown]
+# *Your prediction:*
+
+# %% [markdown]
+# **AI.** Ask:
 # ```
 # Write a Python function my_test(a, b) that returns the two-sided permutation p-value for the difference in means of the arrays a and b, with 2000 shuffles. Then write code that applies it to my plan: [paste your plan], using the table d.
 # ```
@@ -114,7 +150,21 @@ else:
 # Paste the AI's test code here. It must define my_test(a, b).
 
 # %% [markdown]
-# **Check the test on fake groups.** The next cell splits the saline-treated Control mice at random into two fake groups, 200 times, and runs your `my_test` on each split, once with one mean per mouse and once with every reading counted separately.
+# **Check 1: known answers.** Before you trust `my_test` on new data, run it where you know the answer:
+# this morning's lean-mouse tumours (exact two-sided p = 4/252 ≈ 0.016; a shuffle test gives about 0.016 to 0.02), and two identical groups (p should be close to 1).
+# Read the code too: say in one sentence what it does. For a second opinion, paste it into a fresh chat with "Find bugs in this code. Do not fix them."
+
+# %%
+if "my_test" in globals():
+    control, treated = np.array([543, 83, 555, 483, 557]), np.array([0, 70, 0, 257, 29])
+    print("tumours:", my_test(control, treated))
+    print("identical groups:", my_test(control, control.copy()))
+else:
+    print("Run step 4 first: it must define my_test.")
+
+
+# %% [markdown]
+# **Check 2: fake groups.** The next cell splits the saline-treated Control mice at random into two fake groups, 200 times, and runs your `my_test` on each split, once with one mean per mouse and once with every reading counted separately.
 # Nothing differs between fake groups, so a good test calls about 5% of them significant. Predict both rates first.
 
 # %%
@@ -143,7 +193,13 @@ else:
 
 # %% [markdown]
 # ## Step 5 — show the result
-# Ask the AI:
+# **You decide first.** What must the plot show: one dot per mouse? the difference between groups? the shuffled differences?
+
+# %% [markdown]
+# *Your plot plan:*
+
+# %% [markdown]
+# **AI.** Ask, or describe your own plan:
 # ```
 # Write matplotlib code that shows my result: one dot per mouse for the two groups I compared, the group means, and next to it a histogram of the shuffled differences with a line at the observed difference.
 # ```
@@ -153,10 +209,14 @@ else:
 # Paste the AI's result plot here.
 
 # %% [markdown]
-# **AI step.** Write two sentences on what your result means. Then paste:
+# **Check.** Do the plotted group means and the difference match the numbers from step 4?
+
+# %% [markdown]
+# **AI step.** **Step 6 — say what it means.** Write two sentences: what your result means, and what it does not show. Then paste:
 # ```
 # Here is my conclusion: [paste]. Act as a critical reviewer. Find the weakest claim and ask me to fix it. Do not rewrite it.
 # ```
+# Fix it, or explain why the AI is wrong.
 
 # %% [markdown]
 # *Your conclusion:*
