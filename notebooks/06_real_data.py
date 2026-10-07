@@ -128,12 +128,6 @@ perm_test(saline, memantine, rng=np.random.default_rng(0))
 # ## Type I with real noise
 # Take only the saline mice and split them at random into two fake groups. Nothing differs between them, so every "significant" result is a false positive.
 # **Predict first:** the false-positive rate when we test one mean per mouse, and when we test every measurement as if it were a mouse.
-#
-# <details><summary>Answer</summary>
-#
-# About 5% for one mean per mouse; about 50% for every measurement. The 15 readings of one mouse are not independent: they are calipers, not mice.
-#
-# </details>
 
 # %%
 saline_mice = {m: g.BDNF.dropna().to_numpy() for m, g in ctrl[ctrl.treatment == "Saline"].groupby("mouse_id")}
@@ -145,12 +139,6 @@ for level in ["mouse", "measurement"]:
 # ## Type II with a known effect
 # Add a known effect (`delta`, in standard deviations of the mouse means) to one fake group.
 # **Predict first:** power with 3, 5, and 9 mice per group for `delta = 1.0`. Then tweak `delta`. (How to choose a sample size in advance, power analysis, comes on Day 3.)
-#
-# <details><summary>Answer</summary>
-#
-# About 0.00, 0.25, and 0.5. With 3 mice per group there are only 20 splits, so the smallest p is 0.10: the test can never reach 0.05.
-#
-# </details>
 
 # %%
 delta = 1.0

@@ -72,8 +72,9 @@ and check your understanding without AI.
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/04_code_reading.ipynb)
 
 ### Type-I, Type-II errors and statistical power
-The dealer's coin again: false accusations, the power curve, and the trade-off between α and β,
-each worked first without AI and then checked or extended with an AI step.
+The dealer's coin again: false accusations, the power curve, and the trade-off between α and β.
+Questions are on the slides and answered on paper; the notebook checks the answers by simulation
+and holds the AI prompts.
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/05_errors_and_power.ipynb)
 
 ### Type I and Type II errors with real mice

@@ -14,258 +14,124 @@
 # ---
 
 # %% [markdown]
-# # The dealer's coin: how often does a good rule get it wrong?
+# # The dealer's coin: check your answers by simulation
 #
 # [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/05_errors_and_power.ipynb)
 #
-# **Takeaway: the rule sets how often you accuse an honest dealer; how often you catch a cheater depends on the cheat, and only more data makes it easy.**
-# This morning you invented a rule: watch 10 flips, and accuse the dealer if there are 0, 1, 9, or 10 heads.
-# Each part: work it out first with AI closed, then do the **AI step**. Part 5 checks your answers with code.
+# **Takeaway: a simulation is a quick way to check a hand calculation, and to see what changes when you change one thing.**
+# Work each question on paper first, from the slides. Then run the matching cell, compare its number with yours, and try the change it suggests.
+# The AI prompts are here so you can copy them.
 #
 # **Start here:** save your own copy with *File > Save a copy in Drive*, so your edits are kept.
-
-# %% [markdown]
-# ## Part 1 — How often does the rule accuse an honest dealer?
-# Heads in 10 flips of a fair coin:
-#
-# | Heads | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-# |---|---|---|---|---|---|---|---|---|---|---|---|
-# | P | 0.001 | 0.010 | 0.044 | 0.117 | 0.205 | 0.246 | 0.205 | 0.117 | 0.044 | 0.010 | 0.001 |
-#
-# 1. The dealer is honest. How often does your rule accuse them?
-
-# %% [markdown]
-# *Your answer:*
-
-# %% [markdown]
-# ## Part 2 — Two types of error, and the power curve
-# 2. Fill in the table. Which two cells are mistakes? Which one did you just compute? **Predict:** can the other mistake be one number, like 0.022? Write yes or no.
-#
-# |               | Dealer is honest | Dealer cheats |
-# |---------------|------------------|---------------|
-# | Accuse        |                  |               |
-# | Do not accuse |                  |               |
-#
-# 3. The dealer's coin lands heads 70% of the time. Heads in 10 flips of this coin:
-#
-# | Heads | 0–2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-# |---|---|---|---|---|---|---|---|---|---|
-# | P | 0.002 | 0.009 | 0.037 | 0.103 | 0.200 | 0.267 | 0.233 | 0.121 | 0.028 |
-#
-# How often does your rule accuse this cheater? How often does the cheater get away?
-#
-# 4. Compute P(accuse) for coins with 60%, 80%, and 90% heads. Use P(9 heads) = 10 · p⁹ · (1 − p) and P(10 heads) = p¹⁰ (0 and 1 heads are tiny). Sketch P(accuse) against how often the coin lands heads. Where does the curve start?
-
-# %% [markdown]
-# *Your answer:*
-
-# %% [markdown]
-# 4b. Can the Type II error rate of your rule be one number? Write your idea.
-#
-# *Your answer:*
-
-# %% [markdown]
-# **AI step.** Can the Type II error rate of your rule be one number? Write your idea in the answer cell first, then ask the AI tutor:
-# ```
-# My rule: flip 10 times, accuse on 0, 1, 9 or 10 heads. The chance of catching a cheater is 0.048 (60% coin), 0.15 (70%), 0.38 (80%), 0.74 (90%). Can its Type II error rate be one number? My idea: [your idea]. Do not give me the answer; ask me one question at a time.
-# ```
-
-# %% [markdown]
-# ## Part 3 — Reading the power curve, and the trade-off between α and β
-# 5. Put the class's numbers together: P(accuse) for coins with 50%, 60%, 70%, 80%, 90%, and 100% heads. Where does the curve start, and why there? How biased must the coin be before your rule catches it more often than not? What new idea did the AI tutor give you in Part 2?
-
-# %% [markdown]
-# *Your answer:*
-
-# %% [markdown]
-# **AI step.** Visualise the power curve. Ask for:
-# ```
-# Make one self-contained HTML page that plots the power curve of this rule (flip 10 times, accuse on 0, 1, 9, or 10 heads): the chance of accusing against how often the coin lands heads, with a slider for the number of flips.
-# ```
-# Check it: at 50% heads it must show 0.022, and at 70% about 0.15. How does the curve change with 20, 50, and 100 flips?
-
-# %% [markdown]
-# 6. Change the rule: accuse on 0, 1, 2, 8, 9, or 10 heads. Compute the new chance of accusing an honest dealer and of catching the 70% cheater. What did you gain, and what did you pay?
-
-# %% [markdown]
-# *Your answer:*
-
-# %% [markdown]
-# **AI step.** Visualise the trade-off. Ask for:
-# ```
-# Make one self-contained HTML page with two bar charts on one axis: heads in 10 flips for a fair coin and for a coin that lands heads 70% of the time. Let me move the rejection region, shade α and β, and show both numbers.
-# ```
-# Check it against your answers to questions 1, 3, and 6. If it is wrong, tell it exactly: "I set [this]. I expected [this], but got [that]."
-
-# %% [markdown]
-# **AI step.** Explain it. In a new chat, explain Type I and Type II errors to the AI in your own words, using the dealer's coin. Paste first:
-# ```
-# I will explain Type I and Type II errors. Do not reply until I write DONE. Then tell me what is right, what is missing, and what is wrong, and ask me one question about the weakest part.
-# ```
-# Was your prediction in question 2 right?
-
-# %% [markdown]
-# *Your answer:*
-
-# %% [markdown]
-# ## Part 4 (optional) — Three harder questions
-# If time allows. Everyone works through all three.
-#
-# **For each question:** 1. Work it out on paper, AI closed. 2. Check your answer with the AI tutor below. 3. Explain it to a partner without notes: the answer, how you got it, and what it means for research.
-#
-# **A — How many accused dealers are cheaters?**
-# In this casino, 1 in 10 dealers cheats with the 70% coin. You watch 10 flips of each of 1,000 dealers and use your rule.
-# - Fill in the table: how many honest dealers do you accuse, and how many cheaters?
-#
-# |             | Honest dealers (900) | Cheating dealers (100) |
-# |-------------|----------------------|------------------------|
-# | Accused     |                      |                        |
-# | Not accused |                      |                        |
-#
-# - Of the accused dealers, what fraction cheat?
-# - The manager says: "We accused 35 of 1,000 dealers. That is 3.5%, less than 0.05, so this casino has no cheating problem." Is the manager right?
-# - Redo the fraction with 100 flips per dealer (accuse on ≤ 39 or ≥ 61 heads: α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
-# - *Explain to a partner:* why "p < 0.05" does not mean "95% sure the effect is real".
-#
-# **B — Estimating the cheat from caught cheaters**
-# All cheaters use the 70% coin. You estimate each caught cheater's coin from its heads (9 heads of 10 → 0.9). The rule changes with the number of flips, to keep α below 0.05: accuse on ≤ 1 or ≥ 9 heads with 10 flips, ≤ 5 or ≥ 15 with 20, and ≤ 39 or ≥ 61 with 100.
-# - With 10 flips you catch cheaters only at 9 or 10 heads (P = 0.121 and 0.028). What is the average estimate among the cheaters you catch?
-# - The truth is 0.70. Do caught cheaters look more or less biased than they are? Predict the average with 20 and with 100 flips.
-# - In the lab: a study with 5 mice per group finds a significant effect. Is the reported effect likely too big, too small, or right?
-# - *Explain to a partner:* why a small study that finds an effect usually overestimates it.
-#
-# **C — Peeking**
-# Step 1: watch 10 flips; accuse on ≤ 1 or ≥ 9 heads. Step 2: if not accused, watch 10 more; accuse if all 20 flips show ≤ 5 or ≥ 15 heads. Each step alone keeps α below 0.05.
-#
-# | You accuse an honest dealer … | Probability |
-# |---|---|
-# | after the first 10 flips | 0.022 |
-# | only after 10 more flips (all 20: ≤ 5 or ≥ 15 heads) | 0.033 |
-# | in total | |
-# | if you test only once, after all 20 flips (≤ 5 or ≥ 15 heads) | 0.041 |
-#
-# - The dealer is honest. Can the total chance of an accusation be smaller than 0.022? Why?
-# - Add the first two rows. Is the total still below 0.05? Compare it with testing only once, after all 20 flips. Is peeking worth it?
-# - In the lab: p = 0.08 with 5 mice per group, so you add 5 more mice and test again. What is wrong?
-# - *Explain to a partner:* why "add mice until p < 0.05" is not allowed.
-
-# %% [markdown]
-# *Your answer:*
-
-# %% [markdown]
-# **AI step.** Check and go deeper with the AI tutor:
-# ```
-# I am learning [the question]. Here is my answer: [paste]. Do not give me the answer. Tell me what is right and what is wrong, then ask me one question at a time.
-# ```
-
-# %% [markdown]
-# ## Part 5 — Check with code
-# Run each cell only after you have written your answer. `runs` games, one row per game, as this morning.
 
 # %%
 import numpy as np
 
 rng = np.random.default_rng(20261005)
-runs = 100000
+runs = 100000  # games simulated per check
 
 
-def accuse(heads):
-    return (heads <= 1) | (heads >= 9)
+def flips(p, n):
+    """Heads in n flips of a coin that lands heads with probability p, for each of `runs` games."""
+    return (rng.random(size=(runs, n)) < p).sum(axis=1)
+
+
+def accuse(heads, lo=1, hi=9):
+    """Your rule: accuse on lo or fewer heads, or hi or more."""
+    return (heads <= lo) | (heads >= hi)
 
 
 # %% [markdown]
-# ### Question 1: an honest dealer is sometimes accused
+# ## How often does the rule accuse an honest dealer?
+# Compare with your answer from the fair-coin table.
 #
-# <details><summary>Answer</summary>
-#
-# About 0.022: the probability of 0, 1, 9, or 10 heads with a fair coin. This is the Type I error rate of the rule.
-#
-# </details>
+# **Change:** accuse also on 2 or 8 heads (`lo=2, hi=8`).
 
 # %%
-heads = rng.integers(0, 2, size=(runs, 10)).sum(axis=1)
-accuse(heads).mean()
+accuse(flips(0.5, 10)).mean()
 
 # %% [markdown]
-# ### Questions 3–4: the power curve
-# `rng.random(size=(runs, 10)) < p` makes a coin that lands heads with probability `p`.
+# ## Catching a cheater, and the power curve
+# Compare with your P(accuse) for each coin.
 #
-# <details><summary>Answer</summary>
-#
-# P(accuse) = 0.022 at 50% (that is α), 0.048 at 60%, 0.15 at 70%, 0.38 at 80%, 0.74 at 90%. The Type II error rate 1 − P(accuse) changes with the cheat, so there is no single Type II error rate: report it at the smallest cheat you care about, or show the whole curve.
-#
-# </details>
+# **Change:** use 20 flips with the rule `lo=5, hi=15`. How does the curve change?
 
 # %%
 for p in [0.5, 0.6, 0.7, 0.8, 0.9]:
-    heads = (rng.random(size=(runs, 10)) < p).sum(axis=1)
-    print(p, accuse(heads).mean().round(3))
+    print(p, accuse(flips(p, 10)).mean().round(3))
 
 # %% [markdown]
-# ### Question 5: more flips, a steeper curve
+# **AI step.** Write your own idea first, then ask the AI tutor:
+# ```
+# My rule: flip 10 times, accuse on 0, 1, 9 or 10 heads. The chance of catching a cheater is 0.048 (60% coin), 0.15 (70%), 0.38 (80%), 0.74 (90%). Can its Type II error rate be one number? My idea: [your idea]. Do not give me the answer; ask me one question at a time.
+# ```
+
+# %% [markdown]
+# **AI step.** Visualise the power curve:
+# ```
+# Make one self-contained HTML page that plots the power curve of this rule (flip 10 times, accuse on 0, 1, 9, or 10 heads): the chance of accusing against how often the coin lands heads, with a slider for the number of flips.
+# ```
+# Check the page against the numbers above.
+
+# %% [markdown]
+# ## The trade-off between α and β
+# Compare with your hand calculation for the wider rule.
 #
-# <details><summary>Answer</summary>
-#
-# With 10 flips the rule catches the 70% coin 15% of the time; with 20 flips (accuse on ≤ 5 or ≥ 15 heads) 42%; with 50 flips (≤ 17 or ≥ 33) 78%. The false-accusation rate stays below 0.05 (0.022, 0.041, 0.033). More flips make the curve steeper, so smaller cheats become catchable.
-#
-# </details>
+# **Change:** try other rules, and other numbers of flips.
 
 # %%
-for n, lo, hi in [(10, 1, 9), (20, 5, 15), (50, 17, 33)]:
-    fair = rng.integers(0, 2, size=(runs, n)).sum(axis=1)
-    cheat = (rng.random(size=(runs, n)) < 0.7).sum(axis=1)
-    print(n, "flips: alpha", ((fair <= lo) | (fair >= hi)).mean().round(3), "power", ((cheat <= lo) | (cheat >= hi)).mean().round(3))
+for lo, hi in [(0, 10), (1, 9), (2, 8)]:
+    print(f"accuse on <= {lo} or >= {hi}:", "alpha", accuse(flips(0.5, 10), lo, hi).mean().round(3),
+          "power (70% coin)", accuse(flips(0.7, 10), lo, hi).mean().round(3))
 
 # %% [markdown]
-# ### Question 6: the trade-off
-# **Tweak:** change the rule in `accuse` to `heads <= 2` or `heads >= 8`, then rerun the cells for questions 1 and 3–4.
-#
-# <details><summary>Answer</summary>
-#
-# α rises from 0.022 to 0.109; power against the 70% coin rises from 0.15 to 0.38. Moving the rule trades α against β; only more flips lower both.
-#
-# </details>
+# **AI step.** Visualise the trade-off:
+# ```
+# Make one self-contained HTML page with two bar charts on one axis: heads in 10 flips for a fair coin and for a coin that lands heads 70% of the time. Let me move the rejection region, shade α and β, and show both numbers.
+# ```
+# If the page disagrees with the cell above, tell the AI exactly: "I set [this]. I expected [this], but got [that]."
 
 # %% [markdown]
-# ### Question A: who is accused?
+# **AI step.** Explain it. In a new chat, paste this first, then explain Type I and Type II errors in your own words, using the dealer's coin:
+# ```
+# I will explain Type I and Type II errors. Do not reply until I write DONE. Then tell me what is right, what is missing, and what is wrong, and ask me one question about the weakest part.
+# ```
+
+# %% [markdown]
+# ## Optional: three harder questions
+# Work each on paper first. To check an answer with the AI tutor, paste:
+# ```
+# I am learning [the question]. Here is my answer: [paste]. Do not give me the answer. Tell me what is right and wrong, then ask me one question at a time.
+# ```
+
+# %% [markdown]
+# ### A. How many accused dealers are cheaters?
+# 1 in 10 dealers cheats with the 70% coin.
 #
-# <details><summary>Answer</summary>
-#
-# About 20 honest and 15 cheating dealers are accused, so only about 43% of accused dealers cheat. The manager is wrong: 3.5% is not a p-value; if every dealer were honest the rule would accuse about 1,000 × 0.022 = 22, and 35 or more has probability about 0.006, so some dealers cheat. With 100 flips, 76% of the accused cheat; with half the dealers cheating, 87%.
-#
-# </details>
+# **Change:** 100 flips per dealer (`lo=39, hi=61`), or half the dealers cheating.
 
 # %%
 cheat = np.arange(runs) % 10 == 0
-p_heads = np.where(cheat, 0.7, 0.5)
-heads = (rng.random(size=(runs, 10)) < p_heads[:, None]).sum(axis=1)
-cheat[accuse(heads)].mean()
+heads = (rng.random(size=(runs, 10)) < np.where(cheat, 0.7, 0.5)[:, None]).sum(axis=1)
+accused = accuse(heads)
+print("share of dealers accused:", accused.mean().round(3))
+print("share of accused who cheat:", cheat[accused].mean().round(3))
 
 # %% [markdown]
-# ### Question B: caught cheaters look worse than they are
-#
-# <details><summary>Answer</summary>
-#
-# About 0.92 with 10 flips, although the true rate is 0.70. Only extreme samples pass the rule, so significant results exaggerate the effect (the winner's curse).
-#
-# </details>
+# ### B. Estimating the cheat from caught cheaters
+# **Change:** 20 flips (`lo=5, hi=15`) and 100 flips (`lo=39, hi=61`).
 
 # %%
-heads = (rng.random(size=(runs, 10)) < 0.7).sum(axis=1)
-(heads[accuse(heads)] / 10).mean()
+heads = flips(0.7, 10)
+caught = accuse(heads)
+(heads[caught] / 10).mean()
 
 # %% [markdown]
-# ### Question C: peeking
-#
-# <details><summary>Answer</summary>
-#
-# About 0.054: 0.022 at 10 flips plus 0.033 more at 20. Testing only once at 20 flips gives 0.041, so looking twice adds false accusations and crosses 0.05, while the chance of catching the 70% cheater rises only from 0.42 to 0.44. Adding flips (or mice) until you can accuse keeps raising the false-accusation rate.
-#
-# </details>
+# ### C. Peeking
+# **Change:** add a third look after 30 flips. What happens to the false-accusation rate?
 
 # %%
-flips = rng.integers(0, 2, size=(runs, 20))
-first = flips[:, :10].sum(axis=1)
-total = flips.sum(axis=1)
-print("peek:", (accuse(first) | (total <= 5) | (total >= 15)).mean())
-print("one test at 20 flips:", ((total <= 5) | (total >= 15)).mean())
+first, second = flips(0.5, 10), flips(0.5, 10)
+total = first + second
+print("peek at 10, test again at 20:", (accuse(first) | accuse(total, 5, 15)).mean().round(3))
+print("one test at 20 flips:", accuse(total, 5, 15).mean().round(3))

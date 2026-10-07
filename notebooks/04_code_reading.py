@@ -42,12 +42,6 @@ rng = np.random.default_rng(20261005)
 # - Tumor volumes from this morning's notebook 3 (lean mice, whole mm³): control 543, 83, 555, 483, 557; anti-PD-L1 0, 70, 0, 257, 29. There are 252 ways to split the ten mice into two groups of five. What was the exact two-sided p-value this morning?
 #
 # Then run your code on it. Same answer?
-#
-# <details><summary>Answer</summary>
-#
-# Coin: P(0, 1, 9 or 10 heads) = 0.001 + 0.010 + 0.010 + 0.001 = 0.022. Tumors: 4 of the 252 splits are at least as extreme in either direction, so p = 4/252 = 0.016 (one-sided 2/252 = 0.0079). A shuffle-based test gives a value close to these, not exactly, because it samples shuffles at random.
-#
-# </details>
 
 # %% [markdown]
 # ## Let the AI review it, without fixing it
@@ -144,12 +138,6 @@ permutation_test(a, b, n_permutations=9999, seed=0)
 # %% [markdown]
 # ## One-sided: which direction?
 # **Predict:** read the docstring. Which group does `alternative="less"` say is smaller? What p do you expect for `"less"`, and for `"greater"`?
-#
-# <details><summary>Answer</summary>
-#
-# The docstring says "less" tests mean(a) < mean(b). Here a is smaller, so "less" gives about 0.05 (half of the two-sided 0.10), and "greater" gives 1.0. Guessing the direction wrong is a common silent error.
-#
-# </details>
 
 # %%
 permutation_test(a, b, n_permutations=9999, seed=0, alternative="less")
@@ -157,12 +145,6 @@ permutation_test(a, b, n_permutations=9999, seed=0, alternative="less")
 # %% [markdown]
 # ## Few shuffles: a noisy p-value
 # **Tweak and observe:** change `n_permutations` from 9999 to 20, and rerun with `seed=1`, `seed=2`, `seed=3`. How much does p move?
-#
-# <details><summary>Answer</summary>
-#
-# With 20 shuffles, p jumps between about 0.05 and 0.19. More shuffles make the p-value of the same data more stable; they do not add information about the drug.
-#
-# </details>
 
 # %%
 permutation_test(a, b, n_permutations=9999, seed=1)
@@ -178,12 +160,6 @@ permutation_test(a, b, n_permutations=9999, seed=1)
 # %% [markdown]
 # ## Why the "+ 1"?
 # **Predict:** find the last line of the function. When could the p-value be exactly 0 without the `+ 1`? Is p = 0 ever a sensible answer?
-#
-# <details><summary>Answer</summary>
-#
-# Without it, p = 0 whenever no shuffle is as extreme as the real data. But the real labelling is itself one possible shuffle, so the honest smallest p is 1/(n_permutations + 1).
-#
-# </details>
 
 # %% [markdown]
 # ## Explain it, then let the AI test you
