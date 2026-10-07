@@ -123,7 +123,7 @@
 # | Not accused |                      |                        |
 #
 # - Of the accused dealers, what fraction cheat? Is this α? If not, what is it?
-# - Redo it with 100 flips per dealer (α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
+# - Redo it with 100 flips per dealer (accuse on ≤ 39 or ≥ 61 heads: α = 0.035, power = 0.98), and again for a casino where half the dealers cheat (10 flips). Which change raises the fraction more?
 # - *Explain to the class:* why "p < 0.05" does not mean "95% sure the effect is real".
 #
 # **Group B — Estimating the cheat from caught cheaters**
