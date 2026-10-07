@@ -90,5 +90,8 @@ Optional, if time allows: the last slides before the wrap-up.
 ## Day 3 morning:
 
 ### Power analysis
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/07_power.ipynb)
 
 ### Experimental design
+Randomization, blinding, and writing the design down for approval.
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/08_randomization.ipynb)
