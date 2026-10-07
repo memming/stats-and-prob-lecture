@@ -161,8 +161,10 @@ A setup cell creates `rng = np.random.default_rng(20261007)` and repeats noteboo
    (about 5%, as in notebook 7 / about 20% / about 50% / almost always).
    The loop keeps each p-value and each estimated effect (drug minus control).
    Print the fraction with p <= 0.05; histogram of the estimated effects with a line at 0.
-   Collapsed answer: about 23%; the histogram centers near -0.45 C, not 0:
-   the "drug" group is cooler before any drug, because it holds the first-caught mice.
+   Collapsed answer: about 23%; the histogram centers on -0.475 C, not 0,
+   derived in the answer from the catch-position temperatures:
+   (36.1 + 36.45) / 2 - (36.7 + 36.8) / 2.
+   The "drug" group is cooler before any drug, because it holds the first-caught mice.
    The test is not fooled: the groups really differ. Crediting the drug is the mistake.
    Active: predict. Plot 1.
 4. **Shuffle the labels before the experiment.**
@@ -244,7 +246,7 @@ Deliberately absent: pandas, `.ravel`, 2-D arrays, blocking, ANOVA, any widget.
 
 Two histograms of the same form: the estimated drug effect (drug minus control, C) over 1000 simulated experiments,
 with a vertical line at 0, the true effect.
-Convenience allocation centers near -0.45 C; random assignment centers on 0.
+Convenience allocation centers on -0.475 C (the table's -0.45 is one run's estimate); random assignment centers on 0.
 Same x-range in both, so the shift is seen directly.
 No plot of the hidden factor's balance (prose and one printed number instead), no multi-covariate display.
 

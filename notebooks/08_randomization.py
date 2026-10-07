@@ -157,11 +157,13 @@ plt.show()
 # <summary>Answer</summary>
 #
 # About 20%, four times the 5% a fair test allows.
-# The histogram is not centered on 0 but near -0.47 C:
-# in almost every experiment the "drug" group comes out cooler.
+# The histogram is not centered on 0.
+# The drug group holds the first and second mice caught in each cage, typically (36.1 + 36.45) / 2 = 36.275 C;
+# the control group holds the third and fourth, typically (36.7 + 36.8) / 2 = 36.75 C.
+# So the histogram centers on 36.275 - 36.75 = -0.475 C,
+# and in most experiments the "drug" group comes out cooler.
 #
-# The test is not fooled: the groups really do differ.
-# The drug group holds the first mice caught, which were cooler before any injection.
+# The test is not fooled: the groups really do differ, before any injection.
 # The mistake is crediting the drug.
 #
 # </details>
@@ -348,7 +350,7 @@ for scorer in ["blind", "knows the groups"]:
 # <details>
 # <summary>Answer</summary>
 #
-# Blind: about 5%. Knowing the groups: about 11%, twice as often, and about 18% with 40 mice per group.
+# Blind: about 5%. Knowing the groups: about 11%, twice as often, and about 18% if you rerun with `n = 40`.
 # Randomization keeps hidden differences out of who gets the drug;
 # it cannot keep them out of how the outcome is measured.
 # That is the job of **blinding**: the people who give the treatment, measure the outcome, and analyse the data
