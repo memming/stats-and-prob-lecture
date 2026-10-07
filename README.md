@@ -62,10 +62,30 @@ paper and pencil.
 ### Shuffling and Permutation, how to break dependence
 [Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/03_shuffling.ipynb)
 
-## Day 2 afternoon:
+## Day 2 afternoon: Statistics and AI driver's license
 
 Exercises prepared by Hyungju Jeon.
+Learning with AI: make the AI teach instead of tell, read code before trusting it,
+and check your understanding without AI.
+[Slides (PDF)](slides/day2_afternoon_learning_with_ai.pdf).
 
+### Reading code with AI: your morning test and an AI version
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/04_code_reading.ipynb)
+
+### Type-I, Type-II errors and statistical power
+The dealer's coin again: false accusations, the power curve,
+and the trade-off between Type-I and Type-II errors.
+Answer the slide questions on paper, then check them by simulation.
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/05_errors_and_power.ipynb)
+
+### AI-assisted data analysis with real mice
+Clean a messy lab export of BDNF measurements from mouse cortex,
+look at the data, form a hypothesis, test it, and show the result.
+The AI writes the code at each step; students decide and check.
+[Open in Colab](https://colab.research.google.com/github/memming/stats-and-prob-lecture/blob/main/notebooks/06_real_data.ipynb)
+
+### Invent your own procedure for multiple testing
+Optional, if time allows: the last slides before the wrap-up.
 
 ## Day 3 morning:
 
