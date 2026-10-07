@@ -140,7 +140,7 @@
 # | You accuse an honest dealer … | Probability |
 # |---|---|
 # | after the first 10 flips | 0.022 |
-# | only after all 20 flips | 0.033 |
+# | only after 10 more flips (all 20: ≤ 5 or ≥ 15 heads) | 0.033 |
 # | in total | |
 # | if you test only once, after all 20 flips (≤ 5 or ≥ 15 heads) | 0.041 |
 #
