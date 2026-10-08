@@ -133,7 +133,7 @@ print(shuffle_test(control, treated))
 # ## How often does the test catch a drug that works?
 #
 # The next cell repeats the experiment 1000 times and keeps the 1000 p-values.
-# That is a million shuffles; it takes a few seconds.
+# That is a million shuffles; expect about 30 seconds in Colab.
 #
 # **Predict first:** out of 1000 experiments with 5 mice per group, how many detect the drug?
 # Choose your answer in the menu on the right side of the next cell, then run that cell.
