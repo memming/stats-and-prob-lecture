@@ -50,7 +50,7 @@ def shuffle_test(control, treated):
         shuffled = rng.permutation(values)
         diffs.append(shuffled[:k].mean() - shuffled[k:].mean())
     diffs = np.array(diffs)
-    # both directions; "- 1e-9" counts ties despite rounding in decimals (notebook 3, "Why whole numbers?")
+    # "- 1e-9" keeps ties lost to rounding (notebook 3, "Why whole numbers?")
     return (np.abs(diffs) >= abs(observed) - 1e-9).mean()
 
 
