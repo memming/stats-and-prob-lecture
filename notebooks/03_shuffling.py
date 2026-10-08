@@ -58,8 +58,12 @@ print(volumes[:5])  # the first five: control
 print(volumes[5:])  # the sixth onward: anti-PD-L1
 
 # %% [markdown]
-# The mean of each group, then the difference between them
-# (rounded to one decimal with `round`):
+# The mean of each group, then the difference between them:
+# `round(observed, 1)` rounds the difference to one decimal place for printing.
+# The `1` sets the number of decimal places: `round(12.36, 1)` gives `12.4`.
+# It returns a rounded value; `observed` itself keeps its full precision.
+# For a NumPy array, `.round(1)` rounds every element and returns a new array,
+# also leaving the original unchanged.
 
 # %%
 print(volumes[:5].mean(), volumes[5:].mean())
