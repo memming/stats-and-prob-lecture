@@ -74,7 +74,10 @@ def shuffle_test(control, treated):
         shuffled = rng.permutation(values)
         diffs.append(shuffled[:k].mean() - shuffled[k:].mean())
     diffs = np.array(diffs)
-    # both directions; "- 1e-9" counts ties despite rounding in decimals (notebook 3, "Why whole numbers?")
+    # Absolute values count differences in either direction; >= includes ties.
+    # A tied shuffle can appear slightly smaller because of rounding.
+    # 1e-9 is 0.000000001: subtracting it keeps such ties in the count.
+    # See notebook 3, "Why whole numbers?", for an example.
     return (np.abs(diffs) >= abs(observed) - 1e-9).mean()
 
 
@@ -156,6 +159,10 @@ print(p_values[:10])  # the first ten experiments
 # %% [markdown]
 # Which of these ten experiments detected the drug?
 # Compare them all with 0.05 at once, as notebook 1 compared every roll with 3:
+# Our rule is "p at most 0.05", so `<=` includes exactly 0.05.
+# With 1000 shuffles, that happens when 50 are at least as extreme as observed.
+# Using `<` would exclude those experiments and give slightly lower power.
+# Either cutoff convention can be chosen, but choose it before seeing the data.
 
 # %%
 print(p_values[:10] <= 0.05)
