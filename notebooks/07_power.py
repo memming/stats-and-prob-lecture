@@ -391,8 +391,25 @@ plt.show()
 # simulate the experiment you plan with the smallest effect worth finding,
 # run the test you will run, count how often it detects the effect,
 # and raise the number of mice until that fraction is high enough.
-# For the t-test, `statsmodels.stats.power.TTestIndPower` and the free program G\*Power give the answer in one call;
-# the simulation works for any test, the shuffle test included.
+#
+# **G\*Power is a useful tool to learn for planning your own experiments.**
+# [Download G\*Power from its official website](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower).
+# It is free for everyone, runs on Windows and macOS, and requires no programming.
+# It calculates power and sample size for many common tests,
+# including t-tests, ANOVAs, correlations, and regressions.
+# The official website also links to the manual.
+#
+# Choose **A priori** to calculate the sample size before collecting data.
+# Select the test you plan to use, then enter the effect size you want to detect,
+# the significance level, the desired power, and the other inputs for that test.
+# These are the planning choices you just made in this notebook.
+# For two independent groups, follow [UCLA's worked t-test example](https://stats.oarc.ucla.edu/other/gpower/power-analysis-for-two-group-independent-sample-t-test/):
+# its **Determine** button lets you calculate the effect size from assumed means and standard deviations.
+# Choose those assumptions to describe your planned experiment.
+#
+# **Match the power calculation to the test you will run.**
+# G\*Power's t-test calculation plans a t-test; use the simulation above to plan our shuffle test.
+# For a t-test calculation in Python, `statsmodels.stats.power.TTestIndPower` is another option.
 #
 # Power is for planning: computed for an experiment already done, it only restates the p-value.
 # Small experiments that do reach $p \le 0.05$ overstate the effect,
