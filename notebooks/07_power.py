@@ -324,7 +324,9 @@ plt.show()
 # Reports of animal experiments are asked to explain how the sample size was determined
 # (Percie du Sert et al., 2020).
 #
-# **For deeper reading:** van Belle (2008), Chapter 2, free online, derives the rule and its variants;
+# **For deeper reading:** students can access van Belle's [*Statistical Rules of Thumb* (2008)](https://doi.org/10.1002/9780470377963) through CF.
+# The full book is not free to the public, but the author provides a [free PDF of Chapter 2, "Sample Size"](http://www.vanbelle.org/chapters/webchapter2.pdf),
+# which derives the rule and its variants.
 # Lakens (2022) covers how to justify a sample size, with and without power.
 
 # %% [markdown]
