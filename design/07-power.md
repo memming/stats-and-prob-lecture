@@ -1,6 +1,6 @@
 # Notebook 7: power - how many mice to plan for - design
 
-Status: approved 2026-10-07 ("ok. let's try"), every decision at its default; implemented the same day in `notebooks/07_power.py`, paired with `.ipynb` for Colab. Numbered 07 after merging the Day 2 afternoon notebooks 04-06.
+Status: approved 2026-10-07 ("ok. let's try"), every decision at its default; implemented the same day in `notebooks/07_power.py`, paired with `.ipynb` for Colab. Numbered 07 after merging the Day 2 afternoon notebooks 04-06. Taught on Day 3 (2026-10-08); shortened on 2026-10-15 (see "Revision 2026-10-15").
 Ported from last year's Day 4 activity 3 (`old_ref/Day4 activity/Day4_activity3_power_analysis_v1.1.ipynb`),
 redesigned rather than translated (see Rejected).
 Built from a prior-art survey (see `AGENTS.md`, "Starting a new notebook"):
@@ -202,7 +202,7 @@ A setup cell creates `rng = np.random.default_rng(20261007)` once.
    **sample-size planning** (a-priori power analysis).
    The definition (rigor point 1), beside the line that computes it:
    the fraction is the sample mean of indicators, an estimate of the expectation, give or take 0.02 (point 2).
-   A collapsed "Check (optional)": set 31 to 50 in step 3's cell and rerun; about 0.05, the Type I error rate.
+   (The optional null check was cut on 2026-10-15: notebook 8 runs that check at length.)
    The formula: n = 16 sigma^2 / delta^2 per group (point 3), 12.8 here;
    halving the difference worth finding needs four times the mice (about 55 by simulation).
    The planning list: the smallest difference worth finding, a spread from earlier experiments,
@@ -214,7 +214,7 @@ A setup cell creates `rng = np.random.default_rng(20261007)` once.
    the SD from notebook 3's five control mice is about 1200 mm^3.
    Prose prediction from the formula (16 x (1200/300)^2 = 256), then one cell repeating step 4
    with these values, `n_values = [50, 100, 200, 300]` and 300 experiments each, and the same plot.
-   Collapsed answer: about 250 per group; five mice detect it about 6% of the time.
+   Collapsed answer: about 250 per group (the "6% at five mice" was cut on 2026-10-15: no cell produced it).
    This is not "the power of notebook 3's experiment": a finished experiment's power at its own difference
    restates its p-value (point 4). And the 1200 comes from five mice; a separate cohort in the same paper
    suggests a different spread (point 5).
@@ -223,7 +223,7 @@ A setup cell creates `rng = np.random.default_rng(20261007)` once.
    plan how many mice an experiment needs:
    simulate the experiment you plan with the smallest effect worth finding,
    run the test you will run, count, and raise n until the fraction is high enough.
-   For the t-test, `statsmodels.stats.power.TTestIndPower` and G*Power do it in one call;
+   For the t-test, G*Power (effect size d = delta / sigma, 19/17, about 1.1, here) and `statsmodels.stats.power.TTestIndPower` do it in one call;
    the simulation works for any test.
    Caveats, one sentence each: power is for planning (point 4);
    small significant experiments overstate the effect (point 6);
@@ -235,7 +235,7 @@ A setup cell creates `rng = np.random.default_rng(20261007)` once.
 - **Lucky experiments exaggerate.** Record the observed difference in step 3's loop too;
   average it over the experiments that detected the drug: about 29 at n = 5, against the true 19;
   rerun at n = 30: about 19.4. Links to notebook 5's optional winner's-curse question.
-- **A fixed budget.** With 10 mice per group, which differences are detected 80% of the time?
+- **A fixed budget** (cut 2026-10-15, for length). With 10 mice per group, which differences are detected 80% of the time?
   Loop over the difference instead of n (the sensitivity analysis of Lakens 2022).
 
 Budget: 7 steps, 4 active moments (2, 3, 4, 6), two plots of the same form (steps 4 and 6).
@@ -337,7 +337,7 @@ Each has a recommended default; the alternative follows.
 3. **Two-sided test**, as published sample sizes, the worksheet, and notebooks 4-6 assume
    (not: one-sided, as notebook 3's core count).
 4. **Notebook 3's plain fraction, 1000 shuffles per test** (not: the add-one p-value; rigor point 2).
-5. **The null check as an optional collapsed step in naming**, since notebook 6 already ran one
+5. **The null check as an optional collapsed step in naming** (cut 2026-10-15), since notebook 6 already ran one
    (not: its own prediction before the effect, in the Oxford order, which goes over the active-moment budget).
 6. **The formal definition at naming (step 5)**, after students have computed the fraction
    (not: at the top, before the simulation).
@@ -381,6 +381,20 @@ winner's curse 29.4 at n = 5; fixed budget 0.23 / 0.49 / 0.70 / 0.87 at drug mea
 Both plots inspected: legible, one idea each.
 The `.py` and `.ipynb` are synced, and both files are ASCII.
 Pending: the signed-in Colab check from `colab.md`, which needs the notebook on `main`.
+
+## Revision 2026-10-15
+
+Memming, after Day 3: "notebook 7 was fine ... notebook 7 was too verbose and long."
+Content and steps kept; 523 lines down to 434. Cut:
+the optional null check (notebook 8 runs that check at length; its two "as in notebook 7" pointers now name notebook 6's fake groups);
+the fixed-budget stretch; the second "power is for planning" paragraph (the obese answer keeps it);
+the obese answer's "about 6% at five mice", which no cell produced;
+and the G\*Power section from three paragraphs to five lines, now giving its effect size as d = delta / sigma (19/17, about 1.1),
+since "enter the effect size" without it invited typing 19.
+Elsewhere, wording only: each paragraph shortened, no number or claim changed.
+`shuffle_test`'s comment is now the one line notebook 8 carries, so "unchanged" there is literal.
+Checks, executed as above: the shipped copy stops at the first gate; the solved copy runs clean in 23 s locally,
+with the numbers of the 2026-10-07 checks (the cells that draw random numbers are unchanged).
 
 ## References
 

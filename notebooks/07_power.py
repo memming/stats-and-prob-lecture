@@ -21,11 +21,9 @@
 # **Takeaway: simulating the planned experiment many times shows how many mice it needs to catch an effect worth finding.**
 #
 # This is the seventh notebook of the series and the first of Day 3.
-# In notebook 5 you computed how often the coin rule catches a cheating dealer: its power.
-# Notebook 3 ended with obese mice whose tumors varied so much
-# that five mice per group could not tell a modest effect from none.
-# Here you plan an experiment before doing it: how many mice per group?
-# Next, notebook 8 designs the rest of the experiment.
+# Notebook 5 computed how often the coin rule catches a cheating dealer: its power.
+# Here you plan a mouse experiment before doing it: how many mice per group?
+# Notebook 8 designs the rest of the experiment.
 # Exercises marked *Stretch (optional)* can be skipped.
 #
 # Python practice: calling a function you write, once per simulated experiment, inside a loop.
@@ -53,15 +51,11 @@ lean_treated = np.array([0, 70, 0, 257, 29])       # anti-PD-L1
 print(np.concatenate([lean_control, lean_treated]))
 
 # %% [markdown]
-# The next cell puts notebook 3's shuffle loop inside a function,
-# so that one line runs the whole test on any two groups.
-# It returns the p-value: the fraction of shuffles that do at least as well as the real labels.
-# Two changes from notebook 3.
-# It counts both directions, positive and negative differences,
-# as most papers do and as published sample sizes assume.
-# And it uses 1000 shuffles instead of 10000, to keep this notebook fast.
-# The last line runs it on the lean mice.
-# Each of notebook 3's 2 splits (out of 252) has a mirror image with the groups swapped and the sign flipped,
+# The next cell wraps notebook 3's shuffle loop in a function that returns the p-value,
+# so that one line tests any two groups.
+# Two changes from notebook 3: it counts differences in both directions, as most papers do,
+# and it uses 1000 shuffles instead of 10000, for speed.
+# On the lean mice, each of notebook 3's 2 extreme splits (out of 252) has a mirror image with the sign flipped,
 # so both directions give 4/252, about 0.016.
 
 # %%
@@ -74,10 +68,7 @@ def shuffle_test(control, treated):
         shuffled = rng.permutation(values)
         diffs.append(shuffled[:k].mean() - shuffled[k:].mean())
     diffs = np.array(diffs)
-    # Absolute values count differences in either direction; >= includes ties.
-    # A tied shuffle can appear slightly smaller because of rounding.
-    # 1e-9 is 0.000000001: subtracting it keeps such ties in the count.
-    # See notebook 3, "Why whole numbers?", for an example.
+    # "- 1e-9" keeps ties lost to rounding (notebook 3, "Why whole numbers?")
     return (np.abs(diffs) >= abs(observed) - 1e-9).mean()
 
 
@@ -87,20 +78,17 @@ print(shuffle_test(lean_control, lean_treated))
 # ## A drug that works, tested on five mice
 #
 # Mice learn to fear a cage where they once felt a mild foot shock:
-# put back in it, they *freeze*, standing still except for breathing.
-# The fraction of time a mouse freezes measures its fear memory.
-# You plan to test whether a drug given right after training weakens that memory,
-# so that drug-treated mice freeze less.
+# put back in it, they *freeze* (stand still except for breathing),
+# and the fraction of time they freeze measures their fear memory.
+# You plan to test whether a drug given right after training weakens that memory.
 #
-# Carneiro et al. (2018) collected 410 such experiments, control mice against drug-treated mice, from 122 papers.
-# In a typical one, control mice freeze about 50% of the time,
-# mice differ from one another with a standard deviation of about 17 percentage points,
-# and a typical effective drug lowers freezing by about a third, to 31%.
-# Most of those experiments used 8 to 12 mice per group.
+# Carneiro et al. (2018) collected 410 such experiments from 122 papers.
+# In a typical one, control mice freeze about 50% of the time, with a standard deviation of about 17 percentage points between mice,
+# and an effective drug lowers freezing to about 31%.
+# Most used 8 to 12 mice per group.
 #
-# **Here we play nature: we hand the simulation the true mean and standard deviation of each group.
-# No real lab knows them; it guesses them from earlier experiments like these.
-# Planning is a thought experiment built on those guesses.**
+# **Here we play nature: the simulation knows each group's true mean and standard deviation.
+# A real lab only guesses them from earlier experiments like these.**
 # Each simulated mouse is one draw from a bell curve, `rng.normal(mean, sd)`, as in notebook 2.
 
 # %%
@@ -119,13 +107,12 @@ print(shuffle_test(control, treated))
 # <summary>Answer</summary>
 #
 # No.
-# The p-value jumps from run to run, from below 0.01 to above 0.5.
-# Five mice per group differ so much by chance that a drug lowering freezing by 19 points is sometimes hidden.
+# The p-value jumps from run to run, from below 0.01 to above 0.5:
+# five mice per group differ so much by chance that the drug's 19 points are sometimes hidden.
 # Each run is one experiment you might have done.
 #
-# A drug-treated mouse that freezes a negative fraction of the time
-# comes from the bell curve's tail, about 1 drug-treated mouse in 30.
-# Real freezing stays between 0 and 100%; cutting the bell off there barely changes the answers below.
+# (A negative freezing time comes from the bell curve's tail, about 1 drug-treated mouse in 30;
+# cutting the curve off at 0 barely changes the answers below.)
 #
 # </details>
 
@@ -158,21 +145,16 @@ print(p_values[:10])  # the first ten experiments
 
 # %% [markdown]
 # Which of these ten experiments detected the drug?
-# Compare them all with 0.05 at once, as notebook 1 compared every roll with 3:
-# Our rule is "p at most 0.05", so `<=` includes exactly 0.05.
-# With 1000 shuffles, that happens when 50 are at least as extreme as observed.
-# Using `<` would exclude those experiments and give slightly lower power.
-# Either cutoff convention can be chosen, but choose it before seeing the data.
+# Compare them all with 0.05 at once, as notebook 1 compared every roll with 3.
+# The rule is "p at most 0.05", so `<=`: with 1000 shuffles, p can be exactly 0.05.
 
 # %%
 print(p_values[:10] <= 0.05)
 
 # %% [markdown]
-# **Your turn:** replace the `...` with the fraction of all 1000 experiments whose p-value is at most 0.05.
-# Compare as above, but every experiment, then take `.mean()`:
-# each `True` counts as 1 and each `False` as 0, so the mean is the fraction of `True`s.
-# Then run the cell.
-# If you get stuck, open the answer below, replace `...`, and rerun this cell.
+# **Your turn:** replace the `...` with the fraction of all 1000 experiments with p at most 0.05, then run the cell.
+# Compare every experiment as above, then take `.mean()`: each `True` counts as 1 and each `False` as 0.
+# If you get stuck, open the answer below.
 
 # %%
 power = ...  # fraction of experiments with p at most 0.05
@@ -189,9 +171,8 @@ print(power)
 #
 # About 0.33, give or take a few hundredths from one set of 1000 experiments to the next.
 # The drug works in every experiment, yet only about one in three detects it.
-# Did you guess higher? Researchers do too:
-# in one survey, 89% of 214 psychology researchers overestimated the power of research designs
-# with a small expected effect (Bakker et al., 2016).
+# Did you guess higher? So do researchers:
+# 89% of 214 psychology researchers surveyed overestimated the power of small-effect designs (Bakker et al., 2016).
 #
 # So a p-value above 0.05 here never means that the drug does nothing;
 # it means that this experiment did not detect it (Greenland et al., 2016).
@@ -248,9 +229,7 @@ plt.show()
 # Carneiro et al. (2018) reached the same estimate, about 15 per group,
 # and found it in only 12.2% of the experiments they collected.
 #
-# The curve is a little bumpy:
-# each point comes from 500 experiments, so it can be off by a few hundredths either way.
-# The next section says why.
+# The curve is a little bumpy: each point comes from only 500 experiments (the next section says how bumpy).
 #
 # </details>
 
@@ -277,31 +256,14 @@ plt.show()
 #   $$\text{power}(\delta, n) = P_\delta(p \le \alpha) = E_\delta\big[\mathbf{1}\{p \le \alpha\}\big],$$
 #
 #   where $\mathbf{1}\{p \le \alpha\}$ is 1 for an experiment that rejects and 0 for one that does not,
-#   and $P_\delta$ and $E_\delta$ are the probability and the expectation over repeated experiments
-#   in which the true difference is $\delta$.
-# - A **Type II error** is failing to reject a false null hypothesis.
-#   Its probability is $\beta = 1 - \text{power}(\delta, n)$.
-#   With $\delta = 0$, the same probability $P_0(p \le \alpha)$ is the Type I error rate,
-#   at most $\alpha$ (notebook 5).
-# - Power is not one number.
-#   It depends on the difference $\delta$, the number of mice $n$, the spread $\sigma$,
-#   the level $\alpha$, and the test.
-# - Your `power` line computed $\frac{1}{M}\sum_{m=1}^{M} \mathbf{1}\{p_m \le 0.05\}$,
-#   the average of $M = 1000$ zeros and ones:
+#   and $P_\delta$ and $E_\delta$ are taken over repeated experiments with true difference $\delta$.
+# - A **Type II error** is failing to reject a false null hypothesis; its probability is $\beta = 1 - \text{power}(\delta, n)$.
+#   At $\delta = 0$, the same probability $P_0(p \le \alpha)$ is the Type I error rate, at most $\alpha$ (notebook 5).
+# - Power is not one number: it depends on $\delta$, $n$, the spread $\sigma$, $\alpha$, and the test.
+# - Your `power` line averaged $M = 1000$ zeros and ones, $\frac{1}{M}\sum_{m=1}^{M} \mathbf{1}\{p_m \le 0.05\}$:
 #   a sample mean that estimates the expectation above.
 #   As in notebook 2, its standard deviation is $\sqrt{\text{power}\,(1 - \text{power})/M}$,
 #   at most 0.016 for $M = 1000$ and 0.022 for $M = 500$.
-#
-# <details>
-# <summary>Check (optional): a drug that does nothing</summary>
-#
-# In the cell of the 1000 experiments, change `31` to `50`, so that the drug does nothing,
-# and rerun that cell and your `power` cell.
-# You should get about 0.05: with no effect, the fraction of experiments that reject
-# is the Type I error rate, as for notebook 6's fake groups.
-# Change `50` back to `31` and rerun both cells.
-#
-# </details>
 #
 # **A rule of thumb.**
 # For two groups, a two-sided test at $\alpha = 0.05$ with power 0.80,
@@ -312,35 +274,29 @@ plt.show()
 # (Lehr's rule; van Belle, 2008, Section 2.1).
 # Here $16 \times 17^2 / 19^2 \approx 12.8$;
 # the simulation needed about 14, because the rule treats $\sigma$ as known.
-# The rule shows at a glance what the simulation would take long to show:
-# halve the difference worth finding, and you need four times the mice,
-# because the spread of an average shrinks like $1/\sqrt{n}$ (notebook 2).
+# Halve the difference worth finding, and you need four times the mice:
+# the spread of an average shrinks like $1/\sqrt{n}$ (notebook 2).
 #
-# **Sample-size planning**, also called a priori power analysis, fixes before the experiment:
-# the smallest difference worth finding, a spread taken from earlier experiments,
-# $\alpha$ and whether to count one direction or both, the test,
-# and a target power, usually between 80% and 95%.
-# The simulation, or the rule for the simplest case, then gives $n$.
-# Reports of animal experiments are asked to explain how the sample size was determined
-# (Percie du Sert et al., 2020).
+# **Sample-size planning** (a priori power analysis) fixes, before the experiment,
+# the smallest difference worth finding, a spread from earlier experiments,
+# $\alpha$ and one or both directions, the test, and a target power, usually 80% to 95%;
+# the simulation, or the rule in the simplest case, then gives $n$.
+# Reports of animal experiments are asked to explain how the sample size was determined (Percie du Sert et al., 2020).
 #
-# **For deeper reading:** students can access van Belle's [*Statistical Rules of Thumb* (2008)](https://doi.org/10.1002/9780470377963) through CF.
-# The full book is not free to the public, but the author provides a [free PDF of Chapter 2, "Sample Size"](http://www.vanbelle.org/chapters/webchapter2.pdf),
-# which derives the rule and its variants.
-# Lakens (2022) covers how to justify a sample size, with and without power.
+# **Deeper reading:** van Belle's [*Statistical Rules of Thumb*](https://doi.org/10.1002/9780470377963) (through CF;
+# [Chapter 2, "Sample Size", is free](http://www.vanbelle.org/chapters/webchapter2.pdf)) derives the rule;
+# Lakens (2022) covers justifying a sample size, with and without power.
 
 # %% [markdown]
 # ## The obese mice of notebook 3, planned
 #
 # In notebook 3 (Sipe et al., 2022), the five obese control tumors ranged from 1759 to 4540 mm$^3$:
 # a mean of about 2500 mm$^3$ and a standard deviation of about 1200 mm$^3$.
-# Plan the next obese experiment.
-# Suppose the smallest difference worth finding is 300 mm$^3$, a tumor 12% smaller.
+# Plan the next obese experiment, with 300 mm$^3$ (a tumor 12% smaller) as the smallest difference worth finding.
 #
 # **Predict first, from the rule of thumb:** how many mice per group?
-# Write your number down, then run the next cell.
-# It repeats the loop with these values, 300 experiments for each of 50 to 300 mice per group,
-# and takes up to half a minute.
+# Write your number down, then run the next cell:
+# it repeats the loop for 50 to 300 mice per group, 300 experiments each, and takes up to half a minute.
 
 # %%
 n_values = [50, 100, 200, 300]  # mice per group
@@ -369,18 +325,13 @@ plt.show()
 #
 # About 250 per group.
 # The rule gives $16 \times 1200^2 / 300^2 = 256$, and the curve crosses 0.8 between 200 and 300.
-# Five mice per group detect such a difference about 6% of the time,
-# barely more than the 5% that a drug doing nothing would reach.
 # A 300 mm$^3$ difference is small next to tumors that differ by 1200 mm$^3$ from mouse to mouse.
 #
 # Two cautions.
-# This is not "the power of notebook 3's experiment".
-# The power of a finished experiment, computed at the difference it happened to observe,
-# is its p-value in other words and adds nothing to it (Hoenig & Heisey, 2001).
-# Power is for planning.
-# And the 1200 comes from five mice:
-# a spread estimated from so few animals is itself uncertain,
-# so a plan built on it is only as good as that guess (Lakens, 2022).
+# This is not "the power of notebook 3's experiment":
+# power computed for a finished experiment, at the difference it happened to observe,
+# only restates its p-value (Hoenig & Heisey, 2001). Power is for planning.
+# And the 1200 comes from five mice, so a plan built on it is only as good as that guess (Lakens, 2022).
 #
 # </details>
 
@@ -388,34 +339,20 @@ plt.show()
 # ## You can now...
 #
 # plan how many mice an experiment needs:
-# simulate the experiment you plan with the smallest effect worth finding,
-# run the test you will run, count how often it detects the effect,
-# and raise the number of mice until that fraction is high enough.
+# simulate the planned experiment with the smallest effect worth finding,
+# run the test you will run, and raise the number of mice until it detects the effect often enough.
 #
-# **G\*Power is a useful tool to learn for planning your own experiments.**
-# [Download G\*Power from its official website](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower).
-# It is free for everyone, runs on Windows and macOS, and requires no programming.
-# It calculates power and sample size for many common tests,
-# including t-tests, ANOVAs, correlations, and regressions.
-# The official website also links to the manual.
+# **For your own experiments, learn [G\*Power](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower)**:
+# free, for Windows and macOS, no programming.
+# Choose **A priori**, the test you will run, $\alpha$, the target power,
+# and the effect size, which for a t-test is $d = \delta / \sigma$ (here $19/17 \approx 1.1$).
+# [UCLA's worked example](https://stats.oarc.ucla.edu/other/gpower/power-analysis-for-two-group-independent-sample-t-test/)
+# shows how its **Determine** button computes $d$ from assumed means and standard deviations.
+# G\*Power plans a t-test (in Python: `statsmodels.stats.power.TTestIndPower`); to plan a shuffle test, simulate it as above.
 #
-# Choose **A priori** to calculate the sample size before collecting data.
-# Select the test you plan to use, then enter the effect size you want to detect,
-# the significance level, the desired power, and the other inputs for that test.
-# These are the planning choices you just made in this notebook.
-# For two independent groups, follow [UCLA's worked t-test example](https://stats.oarc.ucla.edu/other/gpower/power-analysis-for-two-group-independent-sample-t-test/):
-# its **Determine** button lets you calculate the effect size from assumed means and standard deviations.
-# Choose those assumptions to describe your planned experiment.
-#
-# **Match the power calculation to the test you will run.**
-# G\*Power's t-test calculation plans a t-test; use the simulation above to plan our shuffle test.
-# For a t-test calculation in Python, `statsmodels.stats.power.TTestIndPower` is another option.
-#
-# Power is for planning: computed for an experiment already done, it only restates the p-value.
-# Small experiments that do reach $p \le 0.05$ overstate the effect,
-# because only the lucky ones get there (Button et al., 2013); the first stretch below shows it.
-# And small experiments are common:
-# across neuroscience, the median power has been estimated at 21% (Button et al., 2013).
+# Small experiments that do reach $p \le 0.05$ overstate the effect, because only the lucky ones get there
+# (the stretch below shows it), and they are common:
+# the median power in neuroscience has been estimated at 21% (Button et al., 2013).
 #
 # ## Why plan?
 #
@@ -453,32 +390,6 @@ plt.show()
 # so the ones that detect the drug overstate its effect.
 # This is the winner's curse of notebook 5's optional question, here in mice
 # (Button et al., 2013; Gelman & Carlin, 2014).
-#
-# </details>
-#
-# > **Stretch (optional): a fixed budget.**
-# > Your lab can afford 10 mice per group.
-# > Which drugs can it detect in 80% of experiments?
-# > In a new cell, loop over the drug group's mean freezing, 40, 35, 30, and 25%, instead of over the number of mice.
-#
-# <details>
-# <summary>Answer</summary>
-#
-# ```python
-# n = 10
-# for drug_mean in [40, 35, 30, 25]:
-#     p_values = []
-#     for i in range(500):
-#         control = rng.normal(50, 17, size=n)
-#         treated = rng.normal(drug_mean, 17, size=n)
-#         p_values.append(shuffle_test(control, treated))
-#     print(drug_mean, (np.array(p_values) <= 0.05).mean())
-# ```
-#
-# Only drugs that lower freezing to about 28% or less, a difference of about 22 points.
-# The rule of thumb gives the same: $\delta = \sqrt{16 \times 17^2 / 10} \approx 21.5$.
-# Fixing the number of mice and asking which effects it can detect is a *sensitivity analysis*,
-# the honest plan when the budget sets the number (Lakens, 2022).
 #
 # </details>
 

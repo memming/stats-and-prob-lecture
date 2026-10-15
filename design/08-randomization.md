@@ -1,6 +1,8 @@
 # Notebook 8: randomization, blinding, and the design for approval - design
 
 Status: approved 2026-10-07 with the decisions below (decision 3: two experiments, "yes"). Implemented in `notebooks/08_randomization.py`, paired with `.ipynb` for Colab.
+Not taught on Day 3 (2026-10-08): "the notebook was not ready for its prime time" (Memming, 2026-10-15).
+Revised 2026-10-15: the design form replaced by a design review (step 8), and one exploratory cell cut (step 4).
 Ported from last year's Day 4 activity 2 (`old_ref/Day4 activity/Day4_activity2_experimental_design_v1.1.ipynb`)
 and Ana Machado's slides "Steps in designing a randomised controlled animal experiment" (same folder),
 redesigned rather than translated (see Rejected).
@@ -171,8 +173,8 @@ A setup cell creates `rng = np.random.default_rng(20261007)` and repeats noteboo
    Students fill one line: `group = ...` with `rng.permutation(group)`, the random assignment,
    in a copy of step 3's loop. Print the fraction and the histogram.
    Collapsed answer: about 5%, centered on 0.
-   Prose asks: print one experiment's mean catch position per group (bold: no lab sees this).
-   Is it equal? No: one random assignment is never exactly balanced; on average it is (rigor point 2).
+   Rigor point 2 (one random assignment is never exactly balanced) is a naming bullet in step 6;
+   its own "print the mean catch position per group" cell was cut on 2026-10-15, for length.
    Active: fill one line. Plot 2.
 5. **More mice do not fix it.**
    One cell runs both allocations with `cages = 5` and prints both false-positive rates.
@@ -195,33 +197,28 @@ A setup cell creates `rng = np.random.default_rng(20261007)` and repeats noteboo
    **Blinding**: whoever gives the treatment and whoever measures do not know which group a mouse is in;
    a third party holds the code.
    Active: predict.
-8. **Write it down: the design for approval.**
-   One code cell makes a randomisation sheet:
-   mouse IDs `M01`-`M12`, labels `rng.permutation(["A"] * 6 + ["B"] * 6)`, printed as a table;
-   the key (which letter is the drug) stays with a third party.
-   Then the design paragraph, with little effort and no blank page (Memming, 2026-10-07:
-   "writing part must be not too much effort and pleasant UX"):
-   one Colab form cell, pre-filled with the worked example (the temperature experiment of steps 1-5),
-   with short text fields (question, drug and dose, outcome measure),
-   dropdowns (experimental unit: individual animal / cage / litter / part of the animal;
-   who prepares the coded doses; who measures blind), and number fields
-   (difference worth finding, SD, power, and the n from notebook 7).
-   Running the next cell prints the finished paragraph in the order and vocabulary of
-   Ana Machado's slide "9 - Reporting a design experiment", with our own sentences:
-   the hypothesis and the experiment; the experimental unit (an animal that "can be allocated independently");
-   allocation by a randomisation spreadsheet; allocation concealed by a third party who prepares coded doses;
-   the outcome measure, measured blind; the independent variable and its categories;
-   the analysis, carried out blind on groups "A" and "B"; and the sample size, with its inputs.
-   Students change a few fields to describe their own experiment, rerun, and copy the paragraph.
-   The worked example uses one consistent experiment (fixing the slide's mismatch, see Rejected).
-   A form earns its place here (`demo-design.md`, "Edit a literal before reaching for a widget"):
-   this step is a writing aid, not a statistical concept, and the fields are many.
+8. **Review a design before it goes for approval** (revised 2026-10-15; the original form is under Rejected).
+   A colleague's draft design of the fear-memory experiment (step 7), in a markdown cell,
+   in the order of Ana Machado's slide "9 - Reporting a design experiment", with our own sentences:
+   the hypothesis and the experiment, the outcome, the experimental unit, the allocation, who treats and scores,
+   the analysis, and the sample size with its inputs.
+   Three sentences carry one flaw each, all met in notebooks 7 and 8:
+   "the experimenter randomly picks half of the mice" (haphazard is not random: the first-caught allocation),
+   "the same experimenter gives the injections and scores the videos" (the scorer of step 7),
+   and "8 mice per group, as in our previous study" (notebook 7: about 15 for 80% power).
+   Students find them, double-click the cell, and rewrite the three sentences in their copy:
+   a writing exercise on a page that is not blank, with a right answer.
+   Collapsed answer: each flaw, the result that exposes it, and a rewrite of that one sentence
+   (not the whole repaired paragraph, which would repeat the draft);
+   the rest is sound (the unit is the mouse; drinking water would make it the cage, the stretch).
+   Then the randomisation sheet: `rng.permutation(["A"] * 15 + ["B"] * 15)`, one letter per mouse,
+   the key kept by a third party.
    Pointers: ARRIVE 2.0 Essential 10 (https://arriveguidelines.org), the NC3Rs EDA,
    and "the Champalimaud Vivarium SOPs and the ORBEA process (see Ana Machado's slides)" without the internal URL.
-   Not counted as an active moment; it is a writing exercise.
+   Not counted as an active moment; it is a review and writing exercise.
 9. **You can now ...**
    assign treatments at random, blind the people who treat and measure,
-   and write the design so that an approval committee can check it.
+   and catch the flaws in a design before an approval committee does.
    Closing: "Student" (1931), the Lanarkshire milk experiment: teachers replaced randomly chosen children
    "to obtain a more level selection", and the comparison was spoiled;
    Cobb (2007)'s question: "Where was the randomization, and what inferences does it support?"
@@ -233,7 +230,7 @@ A setup cell creates `rng = np.random.default_rng(20261007)` and repeats noteboo
 - **Which randomized experiments reject?** Under random assignment, keep the gap in mean catch position;
   the experiments with p <= 0.05 are the unlucky draws (rigor point 2).
 
-Budget: 9 steps, 4 active moments (3, 4, 5, 7), two plots (steps 3 and 4), plus a writing exercise.
+Budget: 9 steps, 4 active moments (3, 4, 5, 7), two plots (steps 3 and 4), plus a review-and-rewrite exercise.
 This is at the top of `demo-design.md`'s budget; see decision 2.
 
 Python constructs met, in order:
@@ -301,6 +298,7 @@ No plot of the hidden factor's balance (prose and one printed number instead), n
 | A blanket "nonrandomized studies show larger effects" | - | Crossley 2008 found none in stroke; Hirst 2014's average is small |
 | Trevarthen et al. 2025, R. Soc. Open Sci., https://doi.org/10.1098/rsos.251069 (CC0, cage IDs) | Real cage-level data for the stretch | Only 2 mice per cage, so shuffling mice inflates the result only mildly; the simulation shows the point plainly |
 | The Champalimaud SOP folder (Ana's slide 8) | Matching the protocol to the exact SOPs | Not checked, per Memming; the notebook points to it in words, not by its internal URL |
+| This note's own step 8 of 2026-10-07 | An 11-field Colab form whose next cell printed the design paragraph; students changed fields to describe "an experiment of your own" | Rejected 2026-10-15 ("the protocol writing exercise wasn't well designed", Memming). The template wrote every decision (random, blind, third party) whatever was typed, so students decided nothing and nothing could be wrong; the numbers were unconnected, so any n was "given by simulation"; `unit = "cage"` still printed "animal number"; 11 knobs at once is a dashboard; and "your own experiment" is the open-ended transfer `demo-design.md` rules out |
 
 Not opened, so not used: Lock5, Downey on random assignment, ISCAM instructor notes, Landes 2024,
 Aarts et al. and Holson & Pearce (seen only as quoted), Derry et al. 2000, Wagler & Wagler 2014,
@@ -353,7 +351,7 @@ decision 3 asked "that's a different experiment?"; after the answer below, two e
   Student attributes it to teachers unconsciously giving the milk to the ill-nourished.
 - **p printed as 0.0.** The first convenience experiment with the notebook's seed prints p = 0.0 (no shuffle of 1000 as extreme);
   the markdown after it says this means below 1/1000, never 0, as notebook 3 taught.
-- **The form's third-party sentence** does not start with the field, so a name typed there keeps its capitals
+- **The form's third-party sentence** (form removed 2026-10-15) did not start with the field, so a name typed there kept its capitals
   (`str.capitalize` would lowercase the rest).
 - **Takao's SD.** The survey's effect sizes assumed too small an SD; derived from the reported F and the figure's means,
   the within-position SD is 0.81 C, so the first-two vs last-two gap is 0.58 SD, not about 1.
@@ -373,6 +371,14 @@ The 10-cage numbers (0.454 vs 0.055) and 40-per-group blinding (0.179) come from
 Both plots inspected: same axis, centered where the answers say.
 The `.py` and `.ipynb` are synced, and both files are ASCII.
 Pending: the signed-in Colab check from `colab.md` (form fields, dropdowns), which needs the notebook on `main`.
+
+2026-10-15, after the revision, executed the same way:
+the notebook as shipped stops at the first prediction gate with its message;
+a copy with both predictions chosen and the random-assignment line filled runs clean, in 17 s locally.
+With seed 20261007: first caught 0.218, random 0.054, the 5-cage comparison 0.24 vs 0.051,
+blinding 0.034 vs 0.106; the randomisation sheet prints 30 mice.
+The review answer's numbers come from those cells (about 20%, about 11%) and from notebook 7's sweep (about 15 per group).
+Pending: the signed-in Colab check, now including double-click editing of the draft-design cell.
 
 ## References
 

@@ -23,7 +23,7 @@
 # This is the eighth notebook of the series and the second of Day 3.
 # Notebook 7 planned how many mice an experiment needs.
 # This one plans who gets the drug and who knows it,
-# then writes the design down in the form an animal-experiment approval asks for.
+# then reviews a design written for an animal-experiment approval.
 # Exercises marked *Stretch (optional)* can be skipped.
 #
 # Python practice: shuffling a list of group labels with `rng.permutation`, and picking out a group's values with a comparison.
@@ -114,7 +114,7 @@ print(shuffle_test(temperature[group == "control"], temperature[group == "drug"]
 # (A printed 0.0 means that none of the 1000 shuffles did as well:
 # p is below 1/1000, never exactly 0, as notebook 3 said.)
 # The drug does nothing, so a fair test should call it significant only about 5% of the time,
-# as in notebook 7's check.
+# as for notebook 6's fake groups.
 
 # %% [markdown]
 # ## How often does this experiment find a useless drug?
@@ -130,7 +130,7 @@ print(shuffle_test(temperature[group == "control"], temperature[group == "drug"]
 # %%
 # Choose your prediction in the menu on the right of this cell, then run the cell.
 # The menu rewrites the line below; do not edit it by hand.
-prediction = "choose"  # @param ["choose", "about 5%, as in notebook 7", "about 20%", "about 50%", "almost always"]
+prediction = "choose"  # @param ["choose", "about 5%, as in notebook 6", "about 20%", "about 50%", "almost always"]
 
 # %%
 assert prediction != "choose", "Choose your prediction in the menu on the right of the cell above, then run that cell."
@@ -208,27 +208,6 @@ plt.show()
 # only the way the labels were handed out changed.
 #
 # </details>
-#
-# **Look at one random assignment.**
-# The next cell prints the average catch position of each group (1 = caught first, 4 = caught last).
-# **No real lab sees this; only the simulation knows the catch order.**
-# Are the two groups equal?
-
-# %%
-position = np.tile([1, 2, 3, 4], cages)  # catch position of each mouse
-group = rng.permutation(labels)
-print("drug:", position[group == "drug"].mean(), " control:", position[group == "control"].mean())
-
-# %% [markdown]
-# <details>
-# <summary>Answer</summary>
-#
-# Usually not exactly, and the gap changes each time you rerun the cell, now one way, now the other.
-# Over many assignments the differences average out,
-# and the shuffle test allows for exactly this chance:
-# the about 5% of randomized experiments that reject are the draws that happened to be unbalanced.
-#
-# </details>
 
 # %% [markdown]
 # ## More mice shrink the noise, not the offset
@@ -286,8 +265,7 @@ for allocation in ["first caught", "random"]:
 #
 # - A **confounder** is a difference between the groups, other than the treatment, that affects the outcome:
 #   here, the order of catching.
-#   Giving the drug to the first mice caught made the comparison **biased**:
-#   off in the same direction in every experiment, which more mice do not cure.
+#   It made the comparison **biased**: off in the same direction in every experiment, which more mice do not cure.
 # - **Randomization** (random assignment): chance decides which mouse gets which treatment,
 #   with the group sizes fixed. `rng.permutation(labels)` does exactly that.
 # - Why it works: if the drug does nothing, each mouse's temperature is what it would have been under either label,
@@ -297,18 +275,15 @@ for allocation in ["first caught", "random"]:
 #   $P_0(p \le \alpha) \le \alpha$, the probability taken over the random assignments.
 #   Fisher (1935, p. 24): "the simple precaution of randomisation will suffice to guarantee the validity of the test of significance".
 #   When the labels were assigned at random, the shuffle test is also called a **randomization test**.
-# - One random assignment balances the groups only on average, and the test allows for the rest.
-#   The ARRIVE guidelines for animal research go a step further:
-#   randomize within blocks, for example two drug and two control mice in every cage, chosen by chance,
-#   and then shuffle within cages (Percie du Sert et al., 2020, Box 4).
-#   That design, blocking, is beyond this notebook.
+# - One random assignment is never exactly balanced: the about 5% of randomized experiments that reject
+#   are the unlucky draws, and the 5% allows for them.
+#   The ARRIVE guidelines go further and randomize within each cage, then shuffle within cages
+#   (blocking, beyond this notebook; Percie du Sert et al., 2020, Box 4).
 # - **Haphazard is not random.** "Selecting an animal 'at random' (i.e., haphazardly or arbitrarily) from a cage
 #   is not statistically random, as the process involves human judgement" (Percie du Sert et al., 2020, item 4a).
 #   Whichever mouse comes to hand first is exactly the first-caught allocation.
-# - **Random assignment is not random sampling.** Notebook 1 sampled at random from a population.
-#   Here chance assigns treatments to the mice you have,
-#   which supports "the drug did it, in these mice" (Ernst, 2004);
-#   it does not by itself make these mice stand for all mice.
+# - **Random assignment is not random sampling** (notebook 1): it supports "the drug did it, in these mice" (Ernst, 2004),
+#   not that these mice stand for all mice.
 
 # %% [markdown]
 # ## Randomized, but who scores the mice?
@@ -365,61 +340,61 @@ for scorer in ["blind", "knows the groups"]:
 # </details>
 
 # %% [markdown]
-# ## Write the design down for approval
+# ## Review a design before it goes for approval
 #
 # An animal experiment needs approval before it starts:
 # at Champalimaud, through the ORBEA and the DGAV, following the Vivarium's standard operating procedures
 # (see Ana Machado's slides).
-# The approval asks, among much else, how the animals will be allocated, who will be blinded, and why this many animals.
-# Two cells do most of that writing for you.
+# The application asks, among much else, how the animals will be allocated, who will be blinded, and why this many animals.
 #
-# **A randomisation sheet.** `["A"] * 6 + ["B"] * 6` is a list of six A's and six B's;
-# `rng.permutation` shuffles it, one letter per mouse.
-# A third party decides, and keeps to themselves, which letter is the drug,
-# and prepares the syringes labelled by mouse number only.
-# Everyone else sees only the letters until the analysis is done.
-
-# %%
-codes = rng.permutation(["A"] * 6 + ["B"] * 6)
-for i in range(12):
-    print("mouse", i + 1, codes[i])
+# A colleague drafted the design of the fear-memory experiment above,
+# in the order of Ana Machado's slide "Reporting a design experiment" (Machado, 2024).
+# **Three of its sentences have a flaw you met in notebooks 7 and 8.**
+# Find them, then double-click the paragraph to edit it in your copy, and rewrite those three sentences.
 
 # %% [markdown]
-# **The design paragraph.**
-# The form on the right of the next cell is filled in for the temperature experiment above.
-# Run it, then run the cell after it: it prints the design as a paragraph.
-# Then change the fields to describe an experiment of your own, rerun both cells, and copy the paragraph.
-# Take the number of animals from notebook 7.
-# The order and wording follow Ana Machado's slide "Reporting a design experiment"
-# (Machado, 2024), which also shows a full worked example.
+# > We will test whether drug X, injected right after fear conditioning, weakens fear memory in group-housed adult C57BL/6J mice,
+# > compared with saline injected the same way.
+# > The outcome is the percentage of time each mouse freezes when put back in the conditioning cage the next day, scored from video.
+# > The experimental unit is the mouse.
+# > In each cage, the experimenter randomly picks half of the mice for drug X; the rest receive saline.
+# > The same experimenter gives the injections and scores the videos.
+# > The groups are compared with a two-sided shuffle (randomization) test of the difference in mean freezing,
+# > at a significance level of 0.05.
+# > We will use 8 mice per group, as in our previous study,
+# > where control mice froze about 50% of the time with a standard deviation of 17 points;
+# > we want to detect a drop to 31%.
+
+# %% [markdown]
+# <details>
+# <summary>Answer</summary>
+#
+# 1. "The experimenter randomly picks half of the mice": haphazard is not random (ARRIVE, above).
+#    Whichever mouse comes to hand first is the first-caught allocation,
+#    which made a useless drug significant in about 20% of experiments.
+#    Rewrite: "The mice are allocated at random to two groups with a computer-generated randomisation sheet" (next cell).
+# 2. "The same experimenter gives the injections and scores the videos":
+#    a scorer who knows the groups made a useless drug significant about 11% of the time instead of 5%.
+#    Rewrite: "A lab member who does not handle or score the mice holds the allocation and prepares the doses
+#    labelled by mouse number only; the allocation is revealed after the videos are scored and the analysis is done."
+# 3. "8 mice per group, as in our previous study": a habit, not a plan.
+#    Notebook 7 simulated this experiment: 80% power needs about 15 mice per group.
+#    Rewrite: "Simulating this experiment and test gives a power of 0.8 at 15 mice per group."
+#
+# The rest is sound. The unit is the mouse because each mouse is injected on its own;
+# with the drug in the drinking water it would be the cage (see the stretch).
+#
+# </details>
+
+# %% [markdown]
+# **The randomisation sheet.** `["A"] * 15 + ["B"] * 15` is a list of fifteen A's and fifteen B's;
+# `rng.permutation` shuffles it, one letter per mouse.
+# The third party decides, and keeps to themselves, which letter is the drug.
 
 # %%
-# Fill in the form on the right; each line below is one field.
-question = "whether drug X lowers body temperature"  # @param {type:"string"}
-animals = "group-housed adult C57BL/6J mice"  # @param {type:"string"}
-treatment = "drug X, 10 mg/kg, injected intraperitoneally"  # @param {type:"string"}
-control = "saline, the vehicle, injected the same way"  # @param {type:"string"}
-outcome = "rectal temperature (C), one hour after the injection"  # @param {type:"string"}
-unit = "mouse"  # @param ["mouse", "cage", "litter", "part of the animal"]
-third_party = "a lab member who does not handle or measure the animals"  # @param {type:"string"}
-difference = 1.0  # @param {type:"number"}
-sd = 0.8  # @param {type:"number"}
-power = 0.8  # @param {type:"number"}
-n_per_group = 12  # @param {type:"integer"}
-
-# %%
-print(f"We will test {question} in {animals}, comparing {treatment} with {control}.")
-print(f"The experimental unit is the {unit}: each {unit} can be allocated to a treatment group independently of the others.")
-print(f"The {2 * n_per_group} units are allocated at random to two groups of {n_per_group}, using a computer-generated randomisation sheet.")
-print(f"The allocation is held by {third_party}, who prepares the doses labelled by animal number only, "
-      "so that the person giving them does not know which animal receives which treatment.")
-print(f"The outcome measure is {outcome}. It is measured blind: the allocation is revealed only after all measurements are done.")
-print(f"There is one independent variable of interest, the treatment, with two categories: {control}, and {treatment}.")
-print("The analysis is also carried out blind, on groups coded A and B: "
-      "a two-sided shuffle (randomization) test of the difference in group means, at a significance level of 0.05.")
-print(f"Sample size: a difference of {difference} in {outcome} is the smallest considered biologically important, "
-      f"and earlier experiments give a standard deviation of {sd}. "
-      f"With a significance level of 0.05 and a power of {power}, simulating the planned experiment gives {n_per_group} animals per group.")
+codes = rng.permutation(["A"] * 15 + ["B"] * 15)
+for i in range(30):
+    print("mouse", i + 1, codes[i])
 
 # %% [markdown]
 # Before you submit a real design, check it against the ARRIVE Essential 10
@@ -430,7 +405,7 @@ print(f"Sample size: a difference of {difference} in {outcome} is the smallest c
 # ## You can now...
 #
 # assign treatments at random, blind the people who treat and measure,
-# and write the design so that an approval committee can check it.
+# and catch the flaws in a design before an approval committee does.
 #
 # Shortcuts in allocation are old.
 # In 1930, a study of milk at school in Lanarkshire gave milk to 10000 of 20000 schoolchildren.
